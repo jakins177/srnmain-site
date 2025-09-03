@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SRN • Software Robot Network</title>
+  <meta name="description" content="Meet SRN — a network of AI agent personas you can try, customize, and power with monthly credits.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div>SRN</div>
+          <small style="color:var(--muted); font-weight:600">Software Robot Network</small>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#bots">Bots</a>
+        <a href="#pricing">Credits</a>
+        <a href="#builder">Custom Persona</a>
+        <a href="#faq">FAQ</a>
+        <button class="btn btn-ghost" id="openSignIn" aria-label="Sign in">Sign in</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-grid">
+      <div>
+        <h1>Meet your <span class="gradient-text">Software Robot Network</span></h1>
+        <p>Curated AI agent personas for whatever you’re building next — start with coding (HTML, CSS, JavaScript), then expand into legal, real estate, medical, and entertainment. Top‑tier UX, no fluff.</p>
+        <div class="cta-row">
+          <a href="#bots" class="btn btn-primary">Explore bots</a>
+          <a href="#pricing" class="btn btn-ghost">Buy credits</a>
+          <span class="chip" title="Live status"><span class="dot"></span> Alpha preview</span>
+        </div>
+        <div class="hero-card" style="margin-top:16px" aria-live="polite">
+          <div class="row"><span class="chip">Fast setup</span><span class="chip">No login to try</span><span class="chip">Credit‑based</span></div>
+          <div class="row" style="color:var(--muted)">SRN uses monthly recharge credits — only pay for what you use. Upgrade anytime.</div>
+        </div>
+      </div>
+      <aside>
+        <div class="hero-card" role="status">
+          <div class="row"><div class="avatar" aria-hidden="true">HM</div><div><strong>HTML Master</strong><br><small class="subtle">Your friendly markup mentor</small></div></div>
+          <div class="row" style="color:var(--muted)">“Paste your snippet — I’ll validate, tidy, and explain it line‑by‑line.”</div>
+          <div>
+            <a class="btn btn-primary" href="pages/html-master-signup.html">Try now</a>
+            <button class="btn btn-ghost" data-details="html-master">Details</button>
+          </div>
+          <div class="row"><small class="subtle">Tip: demos are free and don’t consume credits</small></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section id="bots" class="section container">
+    <h2>Persona library</h2>
+    <p class="lead">Pick a specialist to get moving faster. Filter by category or search by name.</p>
+    <div class="pillbar" id="pillbar" role="tablist" aria-label="Categories"></div>
+    <div class="searchbar" style="margin-bottom:14px">
+      <input id="searchInput" placeholder="Search personas… (e.g. HTML, legal, JavaScript)" aria-label="Search personas" />
+      <button class="btn btn-ghost" id="clearSearch" title="Clear search">Clear</button>
+    </div>
+    <div class="grid" id="cards"></div>
+  </section>
+
+  <section id="builder" class="section container">
+    <div class="cta-section">
+      <h2>Create a <span class="gradient-text">custom AI persona</span></h2>
+      <p class="lead">Design the tone, tools, and guardrails. Share it with your team — or with the world. <strong style="color:var(--warn)">Coming soon.</strong></p>
+      <div class="cta-row">
+        <button class="btn btn-primary" id="joinWaitlist">Join waitlist</button>
+        <button class="btn btn-ghost" id="watchDemo">Watch concept demo</button>
+        <span class="subtle">We’ll email you when the builder opens.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="section container">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <div>
+        <h2>Monthly recharge credits</h2>
+        <p class="lead">Simple, transparent plans. Credits renew every month — upgrade anytime.</p>
+      </div>
+      <div class="billing-toggle" role="tablist" aria-label="Billing period">
+        <button id="billMonthly" data-active="true" aria-selected="true">Monthly</button>
+        <button id="billAnnual" aria-selected="false">Annual <span class="chip" style="margin-left:6px">2 months free</span></button>
+      </div>
+    </div>
+
+    <div class="pricing" style="margin-top:14px">
+      <article class="price-card" data-plan="starter" aria-labelledby="starterTitle">
+        <div class="chip">Best for trying</div>
+        <h3 id="starterTitle">Starter</h3>
+        <div class="price" data-price>$5<span class="subtle">/mo</span></div>
+        <div class="note" data-credits>500 credits / month</div>
+        <ul class="features">
+          <li>✔️ Try every coding bot</li>
+          <li>✔️ Light usage across projects</li>
+          <li>✔️ Community support</li>
+        </ul>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="starter">Buy Starter</button>
+          <button class="btn btn-ghost" data-open-details="credits">How credits work</button>
+        </div>
+      </article>
+
+      <article class="price-card" data-plan="pro" aria-labelledby="proTitle">
+        <div class="chip" style="border-color:transparent; background:rgba(0,0,0,.2);">Most popular</div>
+        <h3 id="proTitle">Pro</h3>
+        <div class="price" data-price>$19<span class="subtle">/mo</span></div>
+        <div class="note" data-credits>3,000 credits / month</div>
+        <ul class="features">
+          <li>✔️ Everything in Starter</li>
+          <li>✔️ Priority queue</li>
+          <li>✔️ Early access to new personas</li>
+        </ul>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="pro">Buy Pro</button>
+          <button class="btn btn-ghost" data-open-details="credits">How credits work</button>
+        </div>
+      </article>
+
+      <article class="price-card" data-plan="power" aria-labelledby="powerTitle">
+        <div class="chip" style="border-color:transparent; background:rgba(0,0,0,.2); color:#b7ffbf">For power users</div>
+        <h3 id="powerTitle">Power</h3>
+        <div class="price" data-price>$49<span class="subtle">/mo</span></div>
+        <div class="note" data-credits>10,000 credits / month</div>
+        <ul class="features">
+          <li>✔️ Everything in Pro</li>
+          <li>✔️ Priority support</li>
+          <li>✔️ Team seats (coming soon)</li>
+        </ul>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="power">Buy Power</button>
+          <button class="btn btn-ghost" data-open-details="credits">How credits work</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="faq" class="section container">
+    <h2>FAQ</h2>
+    <details>
+      <summary><strong>How do credits work?</strong></summary>
+      <p class="subtle">Each action (message, analysis, file read, etc.) uses a tiny amount of credits based on compute. Demos are free. Credit costs will be transparently shown per action before you run it.</p>
+    </details>
+    <details>
+      <summary><strong>Do I need an account to try a bot?</strong></summary>
+      <p class="subtle">Nope — you can try any coding persona in a free demo sandbox. Sign in when you want to save history or use your credits.</p>
+    </details>
+    <details>
+      <summary><strong>Can I create my own persona?</strong></summary>
+      <p class="subtle">Yes — the Custom Persona Builder is in development. Join the waitlist above and you’ll get early access.</p>
+    </details>
+  </section>
+
+  <footer class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <div>© <span id="year"></span> SRN — Software Robot Network</div>
+      <div style="display:flex; gap:14px">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="demoModal" aria-label="Persona demo">
+    <div class="modal-head">
+      <strong id="demoTitle">Persona demo</strong>
+      <button class="x" data-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="subtle">This is a placeholder chat. Wire this up to your API when ready.</div>
+      <div id="demoChat" style="border:1px solid var(--border); border-radius:12px; padding:12px; display:grid; gap:10px; background:rgba(255,255,255,.03)"></div>
+      <div style="display:flex; gap:10px">
+        <input id="demoInput" placeholder="Type to the bot…" style="flex:1; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
+        <button class="btn btn-primary" id="demoSend">Send</button>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Close</button>
+      <button class="btn btn-primary" id="demoUpgrade">Sign up & use credits</button>
+    </div>
+  </dialog>
+
+  <dialog id="buyModal" aria-label="Buy credits">
+    <div class="modal-head">
+      <strong>Buy credits</strong>
+      <button class="x" data-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="subtle">Checkout is a placeholder — connect Stripe/credits when you’re ready.</div>
+      <div style="display:grid; gap:10px">
+        <label>Plan
+          <select id="buyPlan" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)">
+            <option value="starter">Starter — $5 / 500 credits</option>
+            <option value="pro">Pro — $19 / 3,000 credits</option>
+            <option value="power">Power — $49 / 10,000 credits</option>
+          </select>
+        </label>
+        <label>Email
+          <input id="buyEmail" placeholder="you@example.com" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
+        </label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="buyNow">Proceed to checkout</button>
+    </div>
+  </dialog>
+
+  <dialog id="infoModal" aria-label="Details">
+    <div class="modal-head">
+      <strong id="infoTitle">Details</strong>
+      <button class="x" data-close>✕</button>
+    </div>
+    <div class="modal-body" id="infoBody"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Close</button>
+    </div>
+  </dialog>
+
+  <dialog id="signinModal" aria-label="Sign in">
+    <div class="modal-head">
+      <strong>Sign in</strong>
+      <button class="x" data-close>✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="subtle">Auth is a placeholder — hook up your real login later.</div>
+      <div style="display:grid; gap:10px">
+        <input id="siEmail" placeholder="you@example.com" style="padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
+        <input id="siPass" type="password" placeholder="Password" style="padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-close>Cancel</button>
+      <button class="btn btn-primary" id="siGo">Sign in</button>
+    </div>
+  </dialog>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

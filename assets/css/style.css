@@ -1,0 +1,119 @@
+:root {
+  --bg: #0b1020;
+  --panel: rgba(255,255,255,.06);
+  --border: rgba(255,255,255,.12);
+  --text: #e9ecf8;
+  --muted: #a2acc3;
+  --link: #9ecbff;
+  --good: #3bd17f;
+  --warn: #ffd76a;
+  --danger: #ff7d7d;
+  --shadow: 0 8px 30px rgba(0,0,0,.35);
+  --grad-1: linear-gradient(135deg,#6ae3ff 0%,#7a6bff 50%,#ff8dfc 100%);
+  --grad-2: linear-gradient(135deg,#00e1ff 0%,#00ffa3 100%);
+  --card-radius: 18px;
+  --btn-radius: 14px;
+  --maxw: 1120px;
+}
+* { box-sizing: border-box }
+html, body { height: 100% }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 20% -20%, rgba(122,107,255,.25), transparent 60%),
+    radial-gradient(1000px 700px at 120% 20%, rgba(106,227,255,.18), transparent 60%),
+    radial-gradient(900px 600px at 50% 100%, rgba(255,141,252,.15), transparent 60%),
+    var(--bg);
+}
+a { color: var(--link); text-decoration: none }
+a:hover { text-decoration: underline }
+.container { width: min(var(--maxw), 92vw); margin: 0 auto }
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(1.2) blur(10px);
+  background: color-mix(in oklab, var(--bg) 80%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0 }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .2px }
+.logo {
+  width: 34px; height: 34px; border-radius: 9px; flex: 0 0 34px;
+  background: var(--grad-1);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 6px 20px rgba(122,107,255,.3);
+  position: relative; overflow: hidden;
+}
+.logo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(220% 100% at 0% 0%, rgba(255,255,255,.6), transparent 55%); mix-blend-mode: overlay }
+.nav-links { display: flex; gap: 18px; align-items: center; font-size: 14px }
+.nav-links a { color: var(--text); opacity: .8 }
+.nav-links a:hover { opacity: 1 }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--border); border-radius: var(--btn-radius); padding: 10px 14px; font-weight: 600; cursor: pointer; transition: .25s transform, .25s box-shadow, .25s opacity; box-shadow: var(--shadow); white-space: nowrap }
+.btn:hover { transform: translateY(-2px) }
+.btn:active { transform: translateY(0) scale(.98) }
+.btn-ghost { background: rgba(255,255,255,.04) }
+.btn-primary { border-color: transparent; background: var(--grad-1); color: #0a0f1c; text-shadow: 0 1px 0 rgba(255,255,255,.3) }
+.btn-outline { background: transparent }
+.hero { padding: clamp(40px, 7vw, 80px) 0 30px; position: relative }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(20px, 5vw, 60px) }
+.hero h1 { font-size: clamp(36px, 5vw, 58px); line-height: 1.05; margin: 0 0 14px; letter-spacing: -.4px }
+.gradient-text { background: var(--grad-1); -webkit-background-clip: text; background-clip: text; color: transparent }
+.hero p { color: var(--muted); font-size: clamp(16px, 2.3vw, 18px); margin: 0 0 18px }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 8px }
+.hero-card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 18px; display: grid; grid-template-columns: 1fr; gap: 12px }
+.hero-card .row { display: flex; align-items: center; gap: 12px }
+.dot { width: 8px; height: 8px; border-radius: 999px; background: #7a6bff; box-shadow: 0 0 0 6px rgba(122,107,255,.15) }
+.section { padding: 36px 0 }
+.section h2 { font-size: clamp(26px, 3.3vw, 34px); margin: 0 0 10px }
+.section p.lead { color: var(--muted); margin: 0 0 16px }
+.pillbar { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0 18px }
+.pill { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--border); background: rgba(255,255,255,.04); padding: 8px 12px; border-radius: 999px; font-weight: 600; font-size: 14px; cursor: pointer; opacity: .9 }
+.pill[data-active="true"] { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.22); opacity: 1 }
+.pill .badge { font-size: 11px; padding: 4px 8px; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,.06); color: var(--warn); font-weight: 700; letter-spacing: .2px }
+.searchbar { display: flex; gap: 10px; align-items: center }
+.searchbar input {
+  flex: 1; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border);
+  background: rgba(255,255,255,.04); color: var(--text); outline: none
+}
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr) }
+.col-4 { grid-column: span 12 }
+@media (min-width: 680px) { .col-4 { grid-column: span 6 } }
+@media (min-width: 980px) { .col-4 { grid-column: span 4 } }
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 16px; display: grid; gap: 12px; position: relative; overflow: hidden; min-height: 180px }
+.card:hover { outline: 1px solid rgba(255,255,255,.18) }
+.card .top { display: flex; align-items: center; gap: 12px; justify-content: space-between }
+.card .id { display: flex; align-items: center; gap: 12px }
+.avatar { width: 42px; height: 42px; border-radius: 12px; background: var(--grad-1); display: grid; place-items: center; color: #0a0f1c; font-weight: 800; letter-spacing: .5px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.2) }
+.meta small { color: var(--muted) }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); padding: 5px 8px; font-size: 12px; border-radius: 999px; background: rgba(255,255,255,.05) }
+.chips { display: flex; flex-wrap: wrap; gap: 8px }
+.card h3 { margin: 2px 0 2px; font-size: 18px }
+.card p { margin: 0; color: var(--muted) }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px }
+.soon { position: absolute; top: 12px; right: -36px; transform: rotate(35deg); background: rgba(255,255,255,.06); border: 1px dashed rgba(255,255,255,.25); padding: 6px 60px; text-transform: uppercase; font-weight: 800; font-size: 12px; letter-spacing: 1px; color: var(--warn) }
+.pricing { display: grid; gap: 16px; grid-template-columns: repeat(12, 1fr) }
+.price-card { grid-column: span 12; background: var(--panel); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 18px; display: grid; gap: 14px }
+@media (min-width: 880px) { .price-card { grid-column: span 4 } }
+.price-card h3 { margin: 0 }
+.price { font-size: 34px; font-weight: 800; letter-spacing: -.3px }
+.note { color: var(--muted); font-size: 13px }
+.features { display: grid; gap: 8px; color: var(--text) }
+.features li { list-style: none; display: flex; gap: 10px; align-items: flex-start }
+.billing-toggle { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; padding: 4px; gap: 4px; background: rgba(255,255,255,.04) }
+.billing-toggle button { border: none; background: transparent; color: var(--text); font-weight: 700; padding: 8px 12px; border-radius: 999px; cursor: pointer; opacity: .7 }
+.billing-toggle button[data-active="true"] { background: rgba(255,255,255,.12); opacity: 1 }
+.cta-section { background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 24px; display: grid; gap: 12px }
+.subtle { color: var(--muted) }
+footer { padding: 40px 0; color: var(--muted); border-top: 1px solid var(--border); margin-top: 40px }
+dialog { border: none; border-radius: 16px; padding: 0; width: min(680px, 92vw); background: color-mix(in oklab, var(--bg) 20%, white 8%); color: var(--text); box-shadow: var(--shadow); }
+dialog::backdrop { background: rgba(3,6,12,.6); backdrop-filter: blur(2px) }
+.modal-head { padding: 16px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center }
+.modal-body { padding: 18px; display: grid; gap: 14px }
+.modal-actions { padding: 0 18px 18px; display: flex; justify-content: flex-end; gap: 10px }
+.x { all: unset; font-weight: 800; cursor: pointer; opacity: .8 }
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 { animation: rise .8s ease both }
+  .card { animation: fadeSlide .5s ease both }
+}
+@keyframes rise { from { transform: translateY(10px); opacity: 0 } }
+@keyframes fadeSlide { from { transform: translateY(8px); opacity: 0 } }

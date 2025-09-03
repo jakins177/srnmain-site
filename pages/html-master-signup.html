@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTML Master • Join the Waitlist</title>
+  <meta name="description" content="Join the HTML Master waitlist — an AI mentor that validates, tidies, and explains your HTML line-by-line.">
+  <meta property="og:title" content="HTML Master — Your AI HTML mentor" />
+  <meta property="og:description" content="Validate, tidy, and learn HTML faster. Join the free waitlist." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="../assets/img/og-html-master.png" />
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><div class="logo" aria-hidden="true"></div> HTML Master</div>
+      <div class="nav-links">
+        <a href="../index.html" class="small">← Back to SRN</a>
+        <span class="chip">Free waitlist</span>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-grid">
+      <div>
+        <h1>Learn HTML faster with <span class="gradient-text">HTML Master</span></h1>
+        <p class="subtle">Your AI mentor that <strong>validates</strong>, <strong>tidies</strong>, and <strong>explains</strong> your markup line‑by‑line — with accessibility tips built in.</p>
+        <div class="cta-row"><a href="#signup" class="btn btn-primary">Join free waitlist</a></div>
+      </div>
+      <aside>
+        <div class="hero-card" aria-hidden="true">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <div class="avatar">HM</div>
+            <div><strong>HTML Master</strong><br><span class="subtle" style="font-size:12px">Demo preview</span></div>
+          </div>
+<pre style="margin:0;background:rgba(255,255,255,.03);border:1px solid var(--border); padding:12px;border-radius:12px;overflow:auto;max-height:220px"><code>&lt;form aria-labelledby="subscribeTitle"&gt;
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input id="email" type="email" required /&gt;
+  &lt;button&gt;Join waitlist&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+          <p class="subtle" style="margin-top:8px">Get instant feedback on semantics, labels, and errors.</p>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-card" style="margin-bottom:16px">
+      <h2 style="margin:0 0 8px">What you’ll get</h2>
+      <div class="grid">
+        <div class="col-4"><strong>Line‑by‑line explanations</strong><br><span class="subtle" style="font-size:12px">Understand what every tag does — in plain language.</span></div>
+        <div class="col-4"><strong>Instant validation</strong><br><span class="subtle" style="font-size:12px">Catch missing alt, improper nesting, and more.</span></div>
+        <div class="col-4"><strong>Production checklists</strong><br><span class="subtle" style="font-size:12px">SEO and accessibility reminders before you ship.</span></div>
+      </div>
+    </section>
+
+    <section id="signup" class="hero-card" aria-labelledby="subscribeTitle">
+      <h2 id="subscribeTitle" style="margin:0 0 8px">Join the HTML Master waitlist</h2>
+      <p class="subtle" style="margin-top:-4px">We’ll notify you when early access opens. Double opt‑in, one email max per week.</p>
+      <form id="waitlistForm" novalidate>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <label>First name
+            <input id="name" name="name" autocomplete="given-name" />
+          </label>
+          <label>Email
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </label>
+        </div>
+        <label>Primary goal
+          <select id="useCase" name="useCase">
+            <option>Learn HTML basics</option>
+            <option>Fix my existing code</option>
+            <option>Ship a website</option>
+            <option>Teach students</option>
+          </select>
+        </label>
+        <input id="website" name="website" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0" />
+        <div class="subtle" style="font-size:12px">By joining, you agree to our <a href="#">Terms</a> and <a href="#">Privacy</a>.</div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-primary" id="submitBtn" type="submit">Join waitlist</button>
+          <span id="formMsg" class="subtle" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>© <span id="year"></span> SRN — HTML Master</div>
+      <div class="subtle"><a href="../index.html">SRN home</a> • <a href="#">Contact</a></div>
+    </div>
+  </footer>
+
+  <script type="module" src="../assets/js/signup.js"></script>
+</body>
+</html>
