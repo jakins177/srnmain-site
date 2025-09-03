@@ -104,6 +104,41 @@ a:hover { text-decoration: underline }
 .billing-toggle button[data-active="true"] { background: rgba(255,255,255,.12); opacity: 1 }
 .cta-section { background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0)); border: 1px solid var(--border); border-radius: var(--card-radius); padding: 24px; display: grid; gap: 12px }
 .subtle { color: var(--muted) }
+#waitlistForm {
+  display: grid;
+  gap: 16px;
+}
+
+#waitlistForm .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+#waitlistForm label {
+  display: grid;
+  gap: 6px;
+}
+
+#waitlistForm input,
+#waitlistForm select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+}
+
+#waitlistForm .fine-print {
+  font-size: 12px;
+}
+
+#waitlistForm .form-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
 footer { padding: 40px 0; color: var(--muted); border-top: 1px solid var(--border); margin-top: 40px }
 dialog { border: none; border-radius: 16px; padding: 0; width: min(680px, 92vw); background: color-mix(in oklab, var(--bg) 20%, white 8%); color: var(--text); box-shadow: var(--shadow); }
 dialog::backdrop { background: rgba(3,6,12,.6); backdrop-filter: blur(2px) }
