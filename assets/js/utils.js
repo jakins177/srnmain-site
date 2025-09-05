@@ -9,6 +9,7 @@ export function el(tag, attrs = {}, children = []) {
     else if (v !== undefined && v !== null) node.setAttribute(k, v);
   });
   for (const child of (Array.isArray(children) ? children : [children])) {
+    if (child == null) continue;
     node.append(child instanceof Node ? child : document.createTextNode(child));
   }
   return node;
