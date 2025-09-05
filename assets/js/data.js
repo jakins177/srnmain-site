@@ -39,20 +39,20 @@ export const personas = [
     title: 'CSS Stylist',
     initials: 'CS',
     category: 'css',
-    status: 'alpha',
+    soon: true,
     desc: 'Layout whisperer. From flexbox to grid, plus token systems and theming tips.',
     tags: ['layout', 'grid', 'design tokens'],
-    actions: ['try','details']
+    actions: ['notify','details']
   },
   {
     id: 'js-debugger',
     title: 'JS Debugger',
     initials: 'JS',
     category: 'javascript',
-    status: 'alpha',
+    soon: true,
     desc: 'Trace errors, suggest fixes, and explain concepts with runnable snippets.',
     tags: ['errors', 'snippets', 'concepts'],
-    actions: ['try','details']
+    actions: ['notify','details']
   },
   {
     id: 'legal-brief',
