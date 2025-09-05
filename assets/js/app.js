@@ -16,6 +16,7 @@ function renderPills() {
 
 const cards = $('#cards');
 function personaDetails(p) {
+  if (p.details) return p.details;
   const cat = categories.find(c => c.id === p.category)?.label || p.category;
   return `<div class="subtle">Category: <strong>${cat}</strong></div>
           <p>${p.desc}</p>
