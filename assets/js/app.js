@@ -42,7 +42,7 @@ function renderCards() {
     const tags = el('div', { class: 'chips' }, (p.tags||[]).map(t => el('span', { class: 'chip' }, t)));
 
     const btns = el('div', { class: 'actions' });
-    if (p.actions.includes('try')) btns.append(el('button', { class: 'btn btn-primary', onclick: () => openDemo(p.id) }, 'Try bot'));
+    if (p.actions.includes('try')) btns.append(el('a', { class: 'btn btn-primary', href: `pages/${p.id}-signup.html` }, 'Try now'));
     if (p.actions.includes('notify')) btns.append(el('button', { class: 'btn btn-outline', onclick: () => openInfo(p.title, `Join the waitlist to get notified when <strong>${p.title}</strong> goes live.`) }, 'Notify me'));
     btns.append(el('button', { class: 'btn btn-ghost', onclick: () => openInfo(p.title, personaDetails(p)) }, 'Details'));
 
