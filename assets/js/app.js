@@ -101,38 +101,18 @@ function openInfo(title, html) {
 }
 window.openInfo = openInfo;
 
-const monthly = { starter: 5, pro: 19, power: 49 };
-const annual  = { starter: 50, pro: 190, power: 490 }; // 2 months free
-let billing = 'monthly';
-function updatePrices() {
-  $$('.price-card').forEach(card => {
-    const plan = card.dataset.plan;
-    const priceEl = card.querySelector('[data-price]');
-    const noteEl = card.querySelector('[data-credits]');
-    const value = billing === 'monthly' ? monthly[plan] : annual[plan];
-    priceEl.innerHTML = `$${value}<span class="subtle">/${billing==='monthly'?'mo':'yr'}</span>`;
-    noteEl.textContent = billing === 'monthly' ? noteEl.textContent.replace(/\d+(,\d{3})* credits \/ month/g, noteEl.textContent.match(/\d+(,\d{3})* credits \/ month/)?.[0] || '') : noteEl.textContent.replace(' / month',' / year');
+  const buyModal = $('#buyModal');
+  $$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
+    const plan = btn.getAttribute('data-buy');
+    $('#buyPlan').value = plan;
+    buyModal.showModal();
+  }));
+  $('#buyNow')?.addEventListener('click', () => {
+    const plan = $('#buyPlan').value; const email = $('#buyEmail').value.trim();
+    if (!email || !/^[^\@\s]+@[^\@\s]+\.[^\@\s]+$/.test(email)) { alert('Please enter a valid email'); return; }
+    alert(`(Placeholder) Proceeding to checkout for ${plan.toUpperCase()}. Connect to Stripe later.`);
+    buyModal.close();
   });
-  $('#billMonthly').dataset.active = String(billing==='monthly');
-  $('#billAnnual').dataset.active  = String(billing!=='monthly');
-  $('#billMonthly').setAttribute('aria-selected', String(billing==='monthly'));
-  $('#billAnnual').setAttribute('aria-selected', String(billing!=='monthly'));
-}
-$('#billMonthly')?.addEventListener('click', () => { billing = 'monthly'; updatePrices(); });
-$('#billAnnual')?.addEventListener('click', () => { billing = 'annual'; updatePrices(); });
-
-const buyModal = $('#buyModal');
-$$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
-  const plan = btn.getAttribute('data-buy');
-  $('#buyPlan').value = plan;
-  buyModal.showModal();
-}));
-$('#buyNow')?.addEventListener('click', () => {
-  const plan = $('#buyPlan').value; const email = $('#buyEmail').value.trim();
-  if (!email || !/^[^\@\s]+@[^\@\s]+\.[^\@\s]+$/.test(email)) { alert('Please enter a valid email'); return; }
-  alert(`(Placeholder) Proceeding to checkout for ${plan.toUpperCase()} — ${billing==='monthly'?'monthly':'annual'} billing. Connect to Stripe later.`);
-  buyModal.close();
-});
 
 document.querySelectorAll('[data-details]').forEach(b => b.addEventListener('click', () => {
   const id = b.getAttribute('data-details');
@@ -145,9 +125,8 @@ $('#siGo')?.addEventListener('click', () => { alert('Signed in (placeholder). Ho
 
 const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-if (pillbar && cards) {
-  renderPills();
-  renderCards();
-  updatePrices();
-}
+  if (pillbar && cards) {
+    renderPills();
+    renderCards();
+  }
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('dialog').forEach(d => d.open && d.close()); });
