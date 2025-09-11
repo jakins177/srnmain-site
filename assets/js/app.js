@@ -101,6 +101,7 @@ function openInfo(title, html) {
 }
 window.openInfo = openInfo;
 
+
 const billMonthly = $('#billMonthly');
 const billAnnual = $('#billAnnual');
 const pricingMonthly = $('#pricingMonthly');
@@ -141,9 +142,11 @@ $('#siGo')?.addEventListener('click', () => { alert('Signed in (placeholder). Ho
 
 const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+
 if (pillbar && cards) {
   renderPills();
   renderCards();
 }
 showBilling('monthly');
+
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('dialog').forEach(d => d.open && d.close()); });
