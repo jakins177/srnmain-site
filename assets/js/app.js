@@ -101,6 +101,23 @@ function openInfo(title, html) {
 }
 window.openInfo = openInfo;
 
+
+const billMonthly = $('#billMonthly');
+const billAnnual = $('#billAnnual');
+const pricingMonthly = $('#pricingMonthly');
+const pricingAnnual = $('#pricingAnnual');
+function showBilling(period) {
+  const isMonthly = period === 'monthly';
+  billMonthly?.setAttribute('aria-selected', String(isMonthly));
+  billAnnual?.setAttribute('aria-selected', String(!isMonthly));
+  if (billMonthly) billMonthly.dataset.active = String(isMonthly);
+  if (billAnnual) billAnnual.dataset.active = String(!isMonthly);
+  if (pricingMonthly) pricingMonthly.hidden = !isMonthly;
+  if (pricingAnnual) pricingAnnual.hidden = isMonthly;
+}
+billMonthly?.addEventListener('click', () => showBilling('monthly'));
+billAnnual?.addEventListener('click', () => showBilling('annual'));
+
   const buyModal = $('#buyModal');
   $$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
     const plan = btn.getAttribute('data-buy');
@@ -125,8 +142,11 @@ $('#siGo')?.addEventListener('click', () => { alert('Signed in (placeholder). Ho
 
 const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  if (pillbar && cards) {
-    renderPills();
-    renderCards();
-  }
+
+if (pillbar && cards) {
+  renderPills();
+  renderCards();
+}
+showBilling('monthly');
+
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('dialog').forEach(d => d.open && d.close()); });
