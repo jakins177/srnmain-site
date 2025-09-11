@@ -101,38 +101,34 @@ function openInfo(title, html) {
 }
 window.openInfo = openInfo;
 
-const monthly = { starter: 5, pro: 19, power: 49 };
-const annual  = { starter: 50, pro: 190, power: 490 }; // 2 months free
-let billing = 'monthly';
-function updatePrices() {
-  $$('.price-card').forEach(card => {
-    const plan = card.dataset.plan;
-    const priceEl = card.querySelector('[data-price]');
-    const noteEl = card.querySelector('[data-credits]');
-    const value = billing === 'monthly' ? monthly[plan] : annual[plan];
-    priceEl.innerHTML = `$${value}<span class="subtle">/${billing==='monthly'?'mo':'yr'}</span>`;
-    noteEl.textContent = billing === 'monthly' ? noteEl.textContent.replace(/\d+(,\d{3})* credits \/ month/g, noteEl.textContent.match(/\d+(,\d{3})* credits \/ month/)?.[0] || '') : noteEl.textContent.replace(' / month',' / year');
-  });
-  $('#billMonthly').dataset.active = String(billing==='monthly');
-  $('#billAnnual').dataset.active  = String(billing!=='monthly');
-  $('#billMonthly').setAttribute('aria-selected', String(billing==='monthly'));
-  $('#billAnnual').setAttribute('aria-selected', String(billing!=='monthly'));
+const billMonthly = $('#billMonthly');
+const billAnnual = $('#billAnnual');
+const pricingMonthly = $('#pricingMonthly');
+const pricingAnnual = $('#pricingAnnual');
+function showBilling(period) {
+  const isMonthly = period === 'monthly';
+  billMonthly?.setAttribute('aria-selected', String(isMonthly));
+  billAnnual?.setAttribute('aria-selected', String(!isMonthly));
+  if (billMonthly) billMonthly.dataset.active = String(isMonthly);
+  if (billAnnual) billAnnual.dataset.active = String(!isMonthly);
+  if (pricingMonthly) pricingMonthly.hidden = !isMonthly;
+  if (pricingAnnual) pricingAnnual.hidden = isMonthly;
 }
-$('#billMonthly')?.addEventListener('click', () => { billing = 'monthly'; updatePrices(); });
-$('#billAnnual')?.addEventListener('click', () => { billing = 'annual'; updatePrices(); });
+billMonthly?.addEventListener('click', () => showBilling('monthly'));
+billAnnual?.addEventListener('click', () => showBilling('annual'));
 
-const buyModal = $('#buyModal');
-$$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
-  const plan = btn.getAttribute('data-buy');
-  $('#buyPlan').value = plan;
-  buyModal.showModal();
-}));
-$('#buyNow')?.addEventListener('click', () => {
-  const plan = $('#buyPlan').value; const email = $('#buyEmail').value.trim();
-  if (!email || !/^[^\@\s]+@[^\@\s]+\.[^\@\s]+$/.test(email)) { alert('Please enter a valid email'); return; }
-  alert(`(Placeholder) Proceeding to checkout for ${plan.toUpperCase()} — ${billing==='monthly'?'monthly':'annual'} billing. Connect to Stripe later.`);
-  buyModal.close();
-});
+  const buyModal = $('#buyModal');
+  $$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
+    const plan = btn.getAttribute('data-buy');
+    $('#buyPlan').value = plan;
+    buyModal.showModal();
+  }));
+  $('#buyNow')?.addEventListener('click', () => {
+    const plan = $('#buyPlan').value; const email = $('#buyEmail').value.trim();
+    if (!email || !/^[^\@\s]+@[^\@\s]+\.[^\@\s]+$/.test(email)) { alert('Please enter a valid email'); return; }
+    alert(`(Placeholder) Proceeding to checkout for ${plan.toUpperCase()}. Connect to Stripe later.`);
+    buyModal.close();
+  });
 
 document.querySelectorAll('[data-details]').forEach(b => b.addEventListener('click', () => {
   const id = b.getAttribute('data-details');
@@ -148,6 +144,6 @@ const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent =
 if (pillbar && cards) {
   renderPills();
   renderCards();
-  updatePrices();
 }
+showBilling('monthly');
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelectorAll('dialog').forEach(d => d.open && d.close()); });

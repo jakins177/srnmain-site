@@ -86,67 +86,102 @@
   </section>
 
   <section id="pricing" class="section container">
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
-      <div>
-        <h2>Monthly Gasergy credits</h2>
-        <p class="lead">Simple, transparent plans. Credits renew every month — upgrade anytime.</p>
-      </div>
-      <div class="billing-toggle" role="tablist" aria-label="Billing period">
-        <button id="billMonthly" data-active="true" aria-selected="true">Monthly</button>
-        <button id="billAnnual" aria-selected="false">Annual <span class="chip" style="margin-left:6px">2 months free</span></button>
-      </div>
+    <div>
+      <h2>Pre-launch Gasergy credits</h2>
+      <p class="lead">Lock in 50% off during pre-launch. Credits renew per your plan.</p>
+      <p class="subtle" style="margin-top:8px"><strong>Note:</strong> SRN is still pre-launch and some products may not be available yet. Buying Gasergy now secures this discount before prices return to normal at launch.</p>
     </div>
 
-    <div class="pricing" style="margin-top:14px">
-      <article class="price-card" data-plan="starter" aria-labelledby="starterTitle">
-        <div class="chip">Best for trying</div>
-        <h3 id="starterTitle">Starter</h3>
-        <div class="price" data-price>$5<span class="subtle">/mo</span></div>
-        <div class="note" data-credits>500 credits / month</div>
-        <ul class="features">
-          <li>✔️ Try every coding bot</li>
-          <li>✔️ Light usage across projects</li>
-          <li>✔️ Community support</li>
-        </ul>
+    <div class="billing-toggle" role="tablist" aria-label="Billing period" style="margin-top:20px">
+      <button id="billMonthly" data-active="true" aria-selected="true">Monthly</button>
+      <button id="billAnnual" aria-selected="false">Annual</button>
+    </div>
+
+    <div id="pricingMonthly" class="pricing" style="margin-top:14px">
+      <article class="price-card" data-plan="business-monthly" aria-labelledby="businessMonthlyTitle">
+        <div class="chip">50% off</div>
+        <h3 id="businessMonthlyTitle">Business</h3>
+        <div class="price">$14.79<span class="subtle">/mo</span></div>
+        <div class="note">500&nbsp;G / month</div>
         <div class="actions">
-          <button class="btn btn-primary" data-buy="starter">Buy Starter</button>
-          <button class="btn btn-ghost" data-open-details="credits">How credits work</button>
+          <button class="btn btn-primary" data-buy="business-monthly">Buy Business</button>
         </div>
       </article>
 
-      <article class="price-card" data-plan="pro" aria-labelledby="proTitle">
-        <div class="chip" style="border-color:transparent; background:rgba(0,0,0,.2);">Most popular</div>
-        <h3 id="proTitle">Pro</h3>
-        <div class="price" data-price>$19<span class="subtle">/mo</span></div>
-        <div class="note" data-credits>3,000 credits / month</div>
-        <ul class="features">
-          <li>✔️ Everything in Starter</li>
-          <li>✔️ Priority queue</li>
-          <li>✔️ Early access to new personas</li>
-        </ul>
+      <article class="price-card" data-plan="enterprise-monthly" aria-labelledby="enterpriseMonthlyTitle">
+        <div class="chip">50% off</div>
+        <h3 id="enterpriseMonthlyTitle">Enterprise</h3>
+        <div class="price">$61.99<span class="subtle">/mo</span></div>
+        <div class="note">10,000&nbsp;G / month</div>
         <div class="actions">
-          <button class="btn btn-primary" data-buy="pro">Buy Pro</button>
-          <button class="btn btn-ghost" data-open-details="credits">How credits work</button>
+          <button class="btn btn-primary" data-buy="enterprise-monthly">Buy Enterprise</button>
         </div>
       </article>
 
-      <article class="price-card" data-plan="power" aria-labelledby="powerTitle">
-        <div class="chip" style="border-color:transparent; background:rgba(0,0,0,.2); color:#b7ffbf">For power users</div>
-        <h3 id="powerTitle">Power</h3>
-        <div class="price" data-price>$49<span class="subtle">/mo</span></div>
-        <div class="note" data-credits>10,000 credits / month</div>
-        <ul class="features">
-          <li>✔️ Everything in Pro</li>
-          <li>✔️ Priority support</li>
-          <li>✔️ Team seats (coming soon)</li>
-        </ul>
+      <article class="price-card" data-plan="professional-monthly" aria-labelledby="professionalMonthlyTitle">
+        <div class="chip">50% off</div>
+        <h3 id="professionalMonthlyTitle">Professional</h3>
+        <div class="price">$17.99<span class="subtle">/mo</span></div>
+        <div class="note">2,500&nbsp;G / month</div>
         <div class="actions">
-          <button class="btn btn-primary" data-buy="power">Buy Power</button>
-          <button class="btn btn-ghost" data-open-details="credits">How credits work</button>
+          <button class="btn btn-primary" data-buy="professional-monthly">Buy Professional</button>
+        </div>
+      </article>
+
+      <article class="price-card" data-plan="starter-monthly" aria-labelledby="starterMonthlyTitle">
+        <div class="chip">50% off</div>
+        <h3 id="starterMonthlyTitle">Starter</h3>
+        <div class="price">$1.79<span class="subtle">/mo</span></div>
+        <div class="note">500&nbsp;G / month</div>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="starter-monthly">Buy Starter</button>
+        </div>
+      </article>
+    </div>
+
+    <div id="pricingAnnual" class="pricing" style="margin-top:14px" hidden>
+      <article class="price-card" data-plan="enterprise-annual" aria-labelledby="enterpriseAnnualTitle">
+        <div class="chip">Annual • 50% off</div>
+        <h3 id="enterpriseAnnualTitle">Enterprise</h3>
+        <div class="price">$749.99<span class="subtle">/yr</span></div>
+        <div class="note">500,000&nbsp;G / year</div>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="enterprise-annual">Buy Enterprise Annual</button>
+        </div>
+      </article>
+
+      <article class="price-card" data-plan="business-annual" aria-labelledby="businessAnnualTitle">
+        <div class="chip">Annual • 50% off</div>
+        <h3 id="businessAnnualTitle">Business</h3>
+        <div class="price">$179.99<span class="subtle">/yr</span></div>
+        <div class="note">100,000&nbsp;G / year</div>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="business-annual">Buy Business Annual</button>
+        </div>
+      </article>
+
+      <article class="price-card" data-plan="professional-annual" aria-labelledby="professionalAnnualTitle">
+        <div class="chip">Annual • 50% off</div>
+        <h3 id="professionalAnnualTitle">Professional</h3>
+        <div class="price">$59.99<span class="subtle">/yr</span></div>
+        <div class="note">20,500&nbsp;G / year</div>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="professional-annual">Buy Professional Annual</button>
+        </div>
+      </article>
+
+      <article class="price-card" data-plan="starter-annual" aria-labelledby="starterAnnualTitle">
+        <div class="chip">Annual • 50% off</div>
+        <h3 id="starterAnnualTitle">Starter</h3>
+        <div class="price">$14.70<span class="subtle">/yr</span></div>
+        <div class="note">5,000&nbsp;G / year</div>
+        <div class="actions">
+          <button class="btn btn-primary" data-buy="starter-annual">Buy Starter Annual</button>
         </div>
       </article>
     </div>
   </section>
+
 
   <section id="faq" class="section container">
     <h2>FAQ</h2>
@@ -203,11 +238,16 @@
       <div class="subtle">Checkout is a placeholder — connect Stripe/credits when you’re ready.</div>
       <div style="display:grid; gap:10px">
         <label>Plan
-          <select id="buyPlan" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)">
-            <option value="starter">Starter — $5 / 500 credits</option>
-            <option value="pro">Pro — $19 / 3,000 credits</option>
-            <option value="power">Power — $49 / 10,000 credits</option>
-          </select>
+            <select id="buyPlan" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)">
+              <option value="business-monthly">Business — $14.79 / 500 G per month</option>
+              <option value="enterprise-monthly">Enterprise — $61.99 / 10,000 G per month</option>
+              <option value="professional-monthly">Professional — $17.99 / 2,500 G per month</option>
+              <option value="starter-monthly">Starter — $1.79 / 500 G per month</option>
+              <option value="enterprise-annual">Enterprise Annual — $749.99 / 500,000 G per year</option>
+              <option value="business-annual">Business Annual — $179.99 / 100,000 G per year</option>
+              <option value="professional-annual">Professional Annual — $59.99 / 20,500 G per year</option>
+              <option value="starter-annual">Starter Annual — $14.70 / 5,000 G per year</option>
+            </select>
         </label>
         <label>Email
           <input id="buyEmail" placeholder="you@example.com" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
