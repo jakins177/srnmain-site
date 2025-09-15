@@ -1,3 +1,22 @@
+<?php
+session_start();
+$is_logged_in = isset($_SESSION['user_id']);
+$gasergy_balance = 0;
+
+if ($is_logged_in) {
+    require_once __DIR__ . '/config/db.php';
+    try {
+        $stmt = $pdo->prepare("SELECT gasergy_balance FROM users WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $user = $stmt->fetch();
+        if ($user) {
+            $gasergy_balance = $user['gasergy_balance'];
+        }
+    } catch (PDOException $e) {
+        // Silently fail, user will just see 0 balance
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +41,12 @@
         <a href="#pricing">Credits</a>
         <a href="#builder">Custom Persona</a>
         <a href="#faq">FAQ</a>
-        <!-- <button class="btn btn-ghost" id="openSignIn" aria-label="Sign in">Sign in</button> -->
+        <?php if ($is_logged_in): ?>
+          <span class="chip">Balance: <?php echo number_format($gasergy_balance); ?> G</span>
+          <a href="auth/logout.php" class="btn btn-ghost">Log Out</a>
+        <?php else: ?>
+          <a href="auth.html" class="btn btn-ghost">Log In</a>
+        <?php endif; ?>
       </div>
     </div>
   </nav>
@@ -235,26 +259,22 @@
       <button class="x" data-close>✕</button>
     </div>
     <div class="modal-body">
-      <div class="subtle">Checkout is a placeholder — connect Stripe/credits when you’re ready.</div>
-      <div style="display:grid; gap:10px">
+      <form id="checkout-form" action="stripe/create_checkout_session.php" method="POST" style="display:grid; gap:10px">
+        <input type="hidden" name="plan" id="plan-input" />
         <label>Plan
-            <select id="buyPlan" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)">
-              <option value="business-monthly">Business — $14.79 / 500 G per month</option>
-              <option value="enterprise-monthly">Enterprise — $61.99 / 10,000 G per month</option>
-              <option value="professional-monthly">Professional — $17.99 / 2,500 G per month</option>
-              <option value="starter-monthly">Starter — $1.79 / 500 G per month</option>
-
-              <option value="enterprise-annual">Enterprise Annual — $749.99 / 500,000 G per year</option>
-              <option value="business-annual">Business Annual — $179.99 / 100,000 G per year</option>
-              <option value="professional-annual">Professional Annual — $59.99 / 20,500 G per year</option>
-              <option value="starter-annual">Starter Annual — $14.70 / 5,000 G per year</option>
-
+            <select name="plan_display" id="buyPlan" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)">
+              <option value="starter-monthly">Starter Monthly — $1.25 / 500 G</option>
+              <option value="professional-monthly">Professional Monthly — $4.99 / 2,500 G</option>
+              <option value="business-monthly">Business Monthly — $14.99 / 10,000 G</option>
+              <option value="enterprise-monthly">Enterprise Monthly — $61.99 / 50,000 G</option>
+              <option value="starter-annual">Starter Annual — $14.70 / 5,000 G</option>
+              <option value="professional-annual">Professional Annual — $59.99 / 20,500 G</option>
+              <option value="business-annual">Business Annual — $179.99 / 100,000 G</option>
+              <option value="enterprise-annual">Enterprise Annual — $749.99 / 500,000 G</option>
             </select>
         </label>
-        <label>Email
-          <input id="buyEmail" placeholder="you@example.com" style="width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
-        </label>
-      </div>
+        <div class="subtle">You will be redirected to Stripe to complete your purchase securely.</div>
+      </form>
     </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" data-close>Cancel</button>
@@ -273,24 +293,10 @@
     </div>
   </dialog>
 
-  <dialog id="signinModal" aria-label="Sign in">
-    <div class="modal-head">
-      <strong>Sign in</strong>
-      <button class="x" data-close>✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="subtle">Auth is a placeholder — hook up your real login later.</div>
-      <div style="display:grid; gap:10px">
-        <input id="siEmail" placeholder="you@example.com" style="padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
-        <input id="siPass" type="password" placeholder="Password" style="padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)" />
-      </div>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" data-close>Cancel</button>
-      <button class="btn btn-primary" id="siGo">Sign in</button>
-    </div>
-  </dialog>
-
+  <script>
+    // Add a global JS variable to know the login state
+    window.isUserLoggedIn = <?php echo json_encode($is_logged_in); ?>;
+  </script>
   <script type="module" src="assets/js/app.js"></script>
 </body>
 </html>

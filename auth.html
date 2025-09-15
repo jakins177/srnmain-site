@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SRN • Login or Sign Up</title>
+  <meta name="description" content="Login or create an account to access the SRN AI Software Robot Network.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div>SRN</div>
+          <small style="color:var(--muted); font-weight:600">Palm Trees AI Software Robot Network</small>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">← Back to Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" style="max-width: 600px; margin-top: 40px;">
+
+    <div class="hero-card" id="signup-form">
+      <h2>Create an Account</h2>
+      <p class="subtle">Get access to the entire network of AI personas.</p>
+      <form action="auth/register.php" method="POST" style="display: grid; gap: 12px;">
+        <label for="reg-email">Email</label>
+        <input id="reg-email" name="email" type="email" required placeholder="you@example.com" />
+        <label for="reg-password">Password</label>
+        <input id="reg-password" name="password" type="password" required placeholder="••••••••" />
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </form>
+      <p style="margin-top: 16px; text-align: center;">
+        Already have an account? <a href="#" id="show-login">Log In</a>
+      </p>
+    </div>
+
+    <div class="hero-card" id="login-form" style="display: none;">
+      <h2>Log In</h2>
+      <p class="subtle">Welcome back!</p>
+      <form action="auth/login.php" method="POST" style="display: grid; gap: 12px;">
+        <label for="login-email">Email</label>
+        <input id="login-email" name="email" type="email" required placeholder="you@example.com" />
+        <label for="login-password">Password</label>
+        <input id="login-password" name="password" type="password" required placeholder="••••••••" />
+        <button type="submit" class="btn btn-primary">Log In</button>
+      </form>
+      <p style="margin-top: 16px; text-align: center;">
+        Don't have an account? <a href="#" id="show-signup">Create one</a>
+      </p>
+    </div>
+
+  </main>
+
+  <footer class="container" style="margin-top: 40px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <div>© <span id="year"></span> SRN — Software Robot Network</div>
+      <div style="display:flex; gap:14px">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const signupForm = document.getElementById('signup-form');
+    const loginForm = document.getElementById('login-form');
+    const showLoginLink = document.getElementById('show-login');
+    const showSignupLink = document.getElementById('show-signup');
+
+    showLoginLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'block';
+    });
+
+    showSignupLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>
