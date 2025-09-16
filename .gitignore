@@ -13,3 +13,4 @@ app.env
 # Logs
 *.log
 gasergy/*.log
+logs/
