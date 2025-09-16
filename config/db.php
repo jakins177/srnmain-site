@@ -17,7 +17,13 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    // In a real application, you would log this error and show a generic message
-    // For now, we'll just die and show the error for debugging purposes.
-    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+    // Log the detailed error to a file
+    $error_message = "Database Connection Error: " . $e->getMessage() . "\n";
+    $log_file = __DIR__ . '/../logs/db.log';
+    file_put_contents($log_file, $error_message, FILE_APPEND);
+
+    // For the user, just show a generic error.
+    // The 500 error will be triggered by this `die()` statement.
+    http_response_code(500);
+    die("A database error occurred. Please check the server logs for details.");
 }
