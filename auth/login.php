@@ -11,11 +11,13 @@ if (empty($email) || empty($password)) {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT id, password FROM users WHERE email = ?");
+
+    $stmt = $pdo->prepare("SELECT id, password_hash FROM users WHERE email = ? AND provider = 'local'");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
 
-    if ($user && password_verify($password, $user['password'])) {
+    if ($user && password_verify($password, $user['password_hash'])) {
+
         // Password is correct, start the session
         $_SESSION['user_id'] = $user['id'];
 

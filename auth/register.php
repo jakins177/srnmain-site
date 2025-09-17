@@ -34,7 +34,9 @@ $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert the new user
 try {
-    $stmt = $pdo->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
+
+    $stmt = $pdo->prepare("INSERT INTO users (email, password_hash) VALUES (?, ?)");
+
     $stmt->execute([$email, $passwordHash]);
 
     header('Location: ../auth.html?success=registered#login-form');
