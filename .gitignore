@@ -1,3 +1,16 @@
 assets/.DS_Store
 gasergy/update_subscription.log
 gasergy/checkout.log
+
+# Composer
+vendor/
+composer.phar
+
+# Environment
+.env
+app.env
+
+# Logs
+*.log
+gasergy/*.log
+logs/

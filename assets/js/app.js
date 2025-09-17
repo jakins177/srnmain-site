@@ -118,27 +118,40 @@ function showBilling(period) {
 billMonthly?.addEventListener('click', () => showBilling('monthly'));
 billAnnual?.addEventListener('click', () => showBilling('annual'));
 
-  const buyModal = $('#buyModal');
-  $$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
-    const plan = btn.getAttribute('data-buy');
-    $('#buyPlan').value = plan;
-    buyModal.showModal();
-  }));
-  $('#buyNow')?.addEventListener('click', () => {
-    const plan = $('#buyPlan').value; const email = $('#buyEmail').value.trim();
-    if (!email || !/^[^\@\s]+@[^\@\s]+\.[^\@\s]+$/.test(email)) { alert('Please enter a valid email'); return; }
-    alert(`(Placeholder) Proceeding to checkout for ${plan.toUpperCase()}. Connect to Stripe later.`);
-    buyModal.close();
-  });
+const buyModal = $('#buyModal');
+const buyPlan = $('#buyPlan');
+const planInput = $('#plan-input');
+const checkoutForm = $('#checkout-form');
 
-document.querySelectorAll('[data-details]').forEach(b => b.addEventListener('click', () => {
-  const id = b.getAttribute('data-details');
-  const p = personas.find(x => x.id === id);
-  openInfo(p.title, personaDetails(p));
+// Handle clicking a "Buy" button on a pricing card
+$$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
+  if (!window.isUserLoggedIn) {
+    window.location.href = 'auth.html?notice=login_required';
+    return;
+  }
+  const plan = btn.getAttribute('data-buy');
+  if (buyPlan) buyPlan.value = plan;
+  if (buyModal) buyModal.showModal();
 }));
 
-$('#openSignIn')?.addEventListener('click', () => $('#signinModal').showModal());
-$('#siGo')?.addEventListener('click', () => { alert('Signed in (placeholder). Hook up real auth.'); $('#signinModal').close(); });
+// Handle clicking "Proceed to checkout" in the modal
+$('#buyNow')?.addEventListener('click', () => {
+  if (buyPlan && planInput && checkoutForm) {
+    planInput.value = buyPlan.value;
+    checkoutForm.submit();
+  }
+});
+
+// Also handle changes in the dropdown
+buyPlan?.addEventListener('change', () => {
+    if (planInput) planInput.value = buyPlan.value;
+});
+
+document.querySelectorAll('[data-details]').forEach(b => b.addEventListener('click', () => {
+    const id = b.getAttribute('data-details');
+    const p = personas.find(x => x.id === id);
+    openInfo(p.title, personaDetails(p));
+}));
 
 const yearEl = document.getElementById('year'); if (yearEl) yearEl.textContent = new Date().getFullYear();
 
