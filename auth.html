@@ -26,6 +26,7 @@
   <main class="container" style="max-width: 600px; margin-top: 40px;">
 
     <div class="hero-card" id="signup-form">
+      <div id="message"></div>
       <h2>Create an Account</h2>
       <p class="subtle">Get access to the entire network of AI personas.</p>
       <form action="auth/register.php" method="POST" style="display: grid; gap: 12px;">
@@ -41,6 +42,7 @@
     </div>
 
     <div class="hero-card" id="login-form" style="display: none;">
+      <div id="login-message"></div>
       <h2>Log In</h2>
       <p class="subtle">Welcome back!</p>
       <form action="auth/login.php" method="POST" style="display: grid; gap: 12px;">
@@ -87,6 +89,39 @@
       loginForm.style.display = 'none';
       signupForm.style.display = 'block';
     });
+
+    const messageDiv = document.getElementById('message');
+    const loginMessageDiv = document.getElementById('login-message');
+
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+    const success = params.get('success');
+
+    if (error) {
+      let errorMessage = '';
+      switch (error) {
+        case 'invalid_input':
+          errorMessage = 'Please provide a valid email and password.';
+          break;
+        case 'user_exists':
+          errorMessage = 'A user with this email already exists. Please log in.';
+          break;
+        case 'db_error':
+          errorMessage = 'An error occurred with the database. Please try again later.';
+          break;
+        default:
+          errorMessage = 'An unknown error occurred.';
+      }
+      messageDiv.textContent = errorMessage;
+      messageDiv.className = 'message error';
+    }
+
+    if (success === 'registered') {
+      loginMessageDiv.textContent = 'Registration successful! Please log in.';
+      loginMessageDiv.className = 'message success';
+      signupForm.style.display = 'none';
+      loginForm.style.display = 'block';
+    }
   </script>
 
 </body>
