@@ -7,38 +7,39 @@ $stripeWebhookSecret = getenv('STRIPE_WEBHOOK_SECRET');
 
 // This mapping connects the plan identifiers from the frontend (e.g., 'starter-monthly')
 // to your Stripe Price IDs and the amount of gasergy the plan provides.
-// IMPORTANT: Replace the placeholder 'price_...' IDs with your actual Stripe Price IDs.
+// IMPORTANT: The price IDs below are for testing purposes only.
+// Replace them with your actual Stripe Price IDs from your Stripe dashboard.
 $plans = [
     'starter-monthly' => [
-        'price_id' => 'price_starter_monthly_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 500
     ],
     'professional-monthly' => [
-        'price_id' => 'price_professional_monthly_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 2500
     ],
     'business-monthly' => [
-        'price_id' => 'price_business_monthly_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 10000
     ],
     'enterprise-monthly' => [
-        'price_id' => 'price_enterprise_monthly_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 50000
     ],
     'starter-annual' => [
-        'price_id' => 'price_starter_annual_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 5000
     ],
     'professional-annual' => [
-        'price_id' => 'price_professional_annual_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 20500
     ],
     'business-annual' => [
-        'price_id' => 'price_business_annual_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 100000
     ],
     'enterprise-annual' => [
-        'price_id' => 'price_enterprise_annual_placeholder',
+        'price_id' => 'price_1PFDNEP9x3d2R65y5rA4M3l6',
         'gasergy' => 500000
     ],
 ];
