@@ -1,12 +1,13 @@
 <?php
 session_start();
-error_log("create_checkout_session.php: Script started for user: " . ($_SESSION['user_id'] ?? 'Not logged in'));
+require_once __DIR__ . '/../config/logging.php';
+custom_log("create_checkout_session.php: Script started for user: " . ($_SESSION['user_id'] ?? 'Not logged in'), 'stripe.log');
 
 
 // 1. Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page if not logged in
-    error_log("create_checkout_session.php: User not logged in. Redirecting to login page.");
+    custom_log("create_checkout_session.php: User not logged in. Redirecting to login page.", 'stripe.log');
     header('Location: ../auth.html?error=login_required');
     exit;
 }
@@ -17,22 +18,22 @@ require_once __DIR__ . '/../config/stripe.php'; // Provides Stripe keys and help
 
 // 3. Get the plan from the POST data
 $planId = $_POST['plan'] ?? '';
-error_log("create_checkout_session.php: Received plan ID: '{$planId}'");
+custom_log("create_checkout_session.php: Received plan ID: '{$planId}'", 'stripe.log');
 if (empty($planId)) {
     http_response_code(400);
-    error_log("create_checkout_session.php: Error: Plan ID is missing.");
+    custom_log("create_checkout_session.php: Error: Plan ID is missing.", 'stripe.log');
     exit('Error: Plan ID is missing.');
 }
 
 // 4. Get the Price ID and Gasergy amount for the selected plan
 $priceId = getPriceIdForPlan($planId);
 $gasergyAmount = getGasergyForPlan($planId);
-error_log("create_checkout_session.php: Plan '{$planId}' maps to Price ID '{$priceId}' and Gasergy Amount '{$gasergyAmount}'");
+custom_log("create_checkout_session.php: Plan '{$planId}' maps to Price ID '{$priceId}' and Gasergy Amount '{$gasergyAmount}'", 'stripe.log');
 
 
 if (!$priceId || $gasergyAmount <= 0) {
     http_response_code(400);
-    error_log("create_checkout_session.php: Error: Invalid plan selected or plan not found in config. Plan ID: '{$planId}'");
+    custom_log("create_checkout_session.php: Error: Invalid plan selected or plan not found in config. Plan ID: '{$planId}'", 'stripe.log');
     exit('Error: Invalid plan selected.');
 }
 
@@ -47,7 +48,7 @@ $baseUrl = "{$protocol}://{$host}";
 
 try {
     // 7. Create a new Stripe Checkout Session
-    error_log("create_checkout_session.php: Attempting to create Stripe Checkout session for user " . $_SESSION['user_id']);
+    custom_log("create_checkout_session.php: Attempting to create Stripe Checkout session for user " . $_SESSION['user_id'], 'stripe.log');
     $checkout_session = \Stripe\Checkout\Session::create([
         'mode' => 'subscription',
         'line_items' => [[
@@ -63,18 +64,18 @@ try {
     ]);
 
     // 8. Redirect the user to the Stripe Checkout page
-    error_log("create_checkout_session.php: Successfully created session. Redirecting to: " . $checkout_session->url);
+    custom_log("create_checkout_session.php: Successfully created session. Redirecting to: " . $checkout_session->url, 'stripe.log');
     header('Location: ' . $checkout_session->url, true, 303);
     exit;
 
 } catch (\Stripe\Exception\ApiErrorException $e) {
     // Handle Stripe API errors
     http_response_code(500);
-    error_log("create_checkout_session.php: Stripe API Error: " . $e->getMessage());
+    custom_log("create_checkout_session.php: Stripe API Error: " . $e->getMessage(), 'stripe.log');
     echo 'Error creating checkout session: ' . htmlspecialchars($e->getMessage());
 } catch (Exception $e) {
     // Handle other errors
     http_response_code(500);
-    error_log("create_checkout_session.php: Unexpected Error: " . $e->getMessage());
+    custom_log("create_checkout_session.php: Unexpected Error: " . $e->getMessage(), 'stripe.log');
     echo 'An unexpected error occurred.';
 }

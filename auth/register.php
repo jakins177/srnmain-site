@@ -1,16 +1,12 @@
 <?php
 require_once __DIR__ . '/../config/db.php';
-
-function log_auth_error($message) {
-    $log_file = __DIR__ . '/../logs/auth.log';
-    file_put_contents($log_file, date('c') . ' - ' . $message . "\n", FILE_APPEND);
-}
+require_once __DIR__ . '/../config/logging.php';
 
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
 
 if (empty($email) || empty($password) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    log_auth_error("Registration failed: Invalid input for email '{$email}'.");
+    custom_log("Registration failed: Invalid input for email '{$email}'.", 'auth.log');
     header('Location: ../auth.html?error=invalid_input');
     exit;
 }
@@ -24,7 +20,7 @@ try {
         exit;
     }
 } catch (PDOException $e) {
-    log_auth_error("Registration DB Error (checking user existence): " . $e->getMessage());
+    custom_log("Registration DB Error (checking user existence): " . $e->getMessage(), 'auth.log');
     header('Location: ../auth.html?error=db_error');
     exit;
 }
@@ -42,7 +38,7 @@ try {
     header('Location: ../auth.html?success=registered#login-form');
     exit;
 } catch (PDOException $e) {
-    log_auth_error("Registration DB Error (inserting new user): " . $e->getMessage());
+    custom_log("Registration DB Error (inserting new user): " . $e->getMessage(), 'auth.log');
     header('Location: ../auth.html?error=db_error');
     exit;
 }
