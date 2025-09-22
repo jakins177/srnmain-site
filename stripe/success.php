@@ -12,7 +12,8 @@ if ($sessionId) {
         // Use the metadata we set during checkout creation
         $gasergyAmount = $session->metadata->gasergy_amount ?? 0;
     } catch (\Stripe\Exception\ApiErrorException $e) {
-        // Error retrieving session. In a real app, log this.
+        require_once __DIR__ . '/../config/logging.php';
+        custom_log('Stripe API Error on success page: ' . $e->getMessage(), 'stripe.log');
         // For now, we'll just show a generic success message.
     }
 }

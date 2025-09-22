@@ -1,16 +1,9 @@
 <?php
-// For debugging webhook issues
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/webhook.log');
-
+require_once __DIR__ . '/../config/logging.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../config/stripe.php';
 
-$logFile = __DIR__ . '/webhook.log';
 $payload = @file_get_contents('php://input');
 $sigHeader = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? '';
 
@@ -19,15 +12,15 @@ try {
     $event = \Stripe\Webhook::constructEvent($payload, $sigHeader, $stripeWebhookSecret);
 } catch (\UnexpectedValueException $e) {
     http_response_code(400);
-    error_log('Invalid payload: ' . $e->getMessage());
+    custom_log('Invalid payload: ' . $e->getMessage(), 'stripe_webhook.log');
     exit();
 } catch (\Stripe\Exception\SignatureVerificationException $e) {
     http_response_code(400);
-    error_log('Invalid signature: ' . $e->getMessage());
+    custom_log('Invalid signature: ' . $e->getMessage(), 'stripe_webhook.log');
     exit();
 }
 
-file_put_contents($logFile, "Received event: " . $event->type . "\n", FILE_APPEND);
+custom_log("Received event: " . $event->type, 'stripe_webhook.log');
 
 // Handle the event
 switch ($event->type) {
@@ -48,10 +41,10 @@ switch ($event->type) {
                     "WHERE id = ?"
                 );
                 $stmt->execute([$gasergyAmount, $customerId, $subscriptionId, $gasergyAmount, $userId]);
-                file_put_contents($logFile, "SUCCESS: checkout.session.completed for user $userId. Credited $gasergyAmount gasergy.\n", FILE_APPEND);
+                custom_log("SUCCESS: checkout.session.completed for user $userId. Credited $gasergyAmount gasergy.", 'stripe_webhook.log');
             } catch (PDOException $e) {
                 http_response_code(500);
-                error_log('DATABASE ERROR on checkout.session.completed: ' . $e->getMessage());
+                custom_log('DATABASE ERROR on checkout.session.completed: ' . $e->getMessage(), 'stripe_webhook.log');
             }
         }
         break;
@@ -90,10 +83,10 @@ switch ($event->type) {
                         "UPDATE users SET gasergy_balance = gasergy_balance + ?, subscription_gasergy = ? WHERE id = ?"
                     );
                     $stmt->execute([$gasergyAmount, $gasergyAmount, $userId]);
-                    file_put_contents($logFile, "SUCCESS: invoice.payment_succeeded for user $userId. Credited $gasergyAmount gasergy for reason: $billingReason.\n", FILE_APPEND);
+                    custom_log("SUCCESS: invoice.payment_succeeded for user $userId. Credited $gasergyAmount gasergy for reason: $billingReason.", 'stripe_webhook.log');
                 } catch (PDOException $e) {
                     http_response_code(500);
-                    error_log('DATABASE ERROR on invoice.payment_succeeded: ' . $e->getMessage());
+                    custom_log('DATABASE ERROR on invoice.payment_succeeded: ' . $e->getMessage(), 'stripe_webhook.log');
                 }
             }
         }
@@ -109,21 +102,21 @@ switch ($event->type) {
                 "UPDATE users SET stripe_subscription_id = NULL, subscription_gasergy = NULL WHERE stripe_subscription_id = ?"
             );
             $stmt->execute([$subscriptionId]);
-            file_put_contents($logFile, "SUCCESS: customer.subscription.deleted for subscription $subscriptionId.\n", FILE_APPEND);
+            custom_log("SUCCESS: customer.subscription.deleted for subscription $subscriptionId.", 'stripe_webhook.log');
         } catch (PDOException $e) {
             http_response_code(500);
-            error_log('DATABASE ERROR on customer.subscription.deleted: ' . $e->getMessage());
+            custom_log('DATABASE ERROR on customer.subscription.deleted: ' . $e->getMessage(), 'stripe_webhook.log');
         }
         break;
 
     case 'invoice.payment_failed':
         $invoice = $event->data->object;
-        error_log("Payment failed for invoice {$invoice->id}, customer {$invoice->customer}.");
+        custom_log("Payment failed for invoice {$invoice->id}, customer {$invoice->customer}.", 'stripe_webhook.log');
         // Optionally, implement logic to notify user or pause service.
         break;
 
     default:
-        file_put_contents($logFile, "INFO: Unhandled event type '{$event->type}'.\n", FILE_APPEND);
+        custom_log("INFO: Unhandled event type '{$event->type}'.", 'stripe_webhook.log');
 }
 
 http_response_code(200);
