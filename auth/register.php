@@ -31,7 +31,7 @@ $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 // Insert the new user
 try {
 
-    $stmt = $pdo->prepare("INSERT INTO users (email, password_hash) VALUES (?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, gasergy_balance) VALUES (?, ?, 120)");
 
     $stmt->execute([$email, $passwordHash]);
 
