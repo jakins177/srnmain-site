@@ -11,35 +11,35 @@ $stripeWebhookSecret = getenv('STRIPE_WEBHOOK_SECRET');
 // Replace them with your actual Stripe Price IDs from your Stripe dashboard.
 $plans = [
     'starter-monthly' => [
-        'price_id' => 'prod_T1xcVZSBJr1hGV',
+        'price_id' => 'price_1RqQouGUmegTY8R1SU4OEqux',
         'gasergy' => 500
     ],
     'professional-monthly' => [
-        'price_id' => 'prod_T1xfSwQXumMSvD',
+        'price_id' => 'price_1S5tkaGUmegTY8R1xVr4Kw0W',
         'gasergy' => 2500
     ],
     'business-monthly' => [
-        'price_id' => 'prod_T1xlJ5oEznseYJ',
+        'price_id' => 'price_1S5tpWGUmegTY8R1zh93AGUL',
         'gasergy' => 10000
     ],
     'enterprise-monthly' => [
-        'price_id' => 'prod_T1xnGwrNtYSoKq',
+        'price_id' => 'price_1RqQy3GUmegTY8R1bvSMgYYG',
         'gasergy' => 50000
     ],
     'starter-annual' => [
-        'price_id' => 'prod_T1zQGSTHXdwECQ',
+        'price_id' => 'price_1S5vRkGUmegTY8R1mqNGgJl3',
         'gasergy' => 5000
     ],
     'professional-annual' => [
-        'price_id' => 'prod_T1zSuHhdya85TX',
+        'price_id' => 'price_1S5vTyGUmegTY8R1t1nUDsae',
         'gasergy' => 20500
     ],
     'business-annual' => [
-        'price_id' => 'prod_T1zWpBmPDZVuLr',
+        'price_id' => 'price_1S5vXOGUmegTY8R1CCmBlHHQ',
         'gasergy' => 100000
     ],
     'enterprise-annual' => [
-        'price_id' => 'prod_T1zbzJoclkkVG2',
+        'price_id' => 'price_1S5vbqGUmegTY8R1uNpO5NFz',
         'gasergy' => 500000
     ],
 ];
