@@ -59,7 +59,8 @@ try {
         'cancel_url'  => $baseUrl . '/index.html', // Redirect to home page on cancellation
         'client_reference_id' => $_SESSION['user_id'], // Link the session to the logged-in user
         'metadata' => [
-            'gasergy_amount' => $gasergyAmount // Pass gasergy amount for webhook and success page
+            'gasergy_amount' => $gasergyAmount, // Pass gasergy amount for webhook and success page
+            'app_id' => 'main_site' // Track the application source
         ],
     ]);
 
