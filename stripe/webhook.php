@@ -20,6 +20,37 @@ try {
     exit();
 }
 
+// Extract app_id from metadata
+$app_id = null;
+if (isset($event->data->object->metadata->app_id)) {
+    $app_id = $event->data->object->metadata->app_id;
+} else if ($event->type === 'invoice.payment_succeeded' || $event->type === 'invoice.payment_failed') {
+    // For invoice events, we might need to retrieve the subscription to get the metadata
+    $invoice = $event->data->object;
+    if (isset($invoice->subscription)) {
+        try {
+            $subscription = \Stripe\Subscription::retrieve($invoice->subscription);
+            if (isset($subscription->metadata->app_id)) {
+                $app_id = $subscription->metadata->app_id;
+            }
+        } catch (\Stripe\Exception\ApiErrorException $e) {
+            custom_log('Error retrieving subscription: ' . $e->getMessage(), 'stripe_webhook.log');
+        }
+    }
+}
+
+// This is a placeholder function. In a real application, you would have a more robust
+// way of mapping price IDs to gasergy amounts, perhaps by querying the database or
+// using a configuration file.
+function getGasergyForPriceId($priceId) {
+    // Example mapping
+    $priceMap = [
+        'price_1PKc85RxKaq31nU54Z4g3aXy' => 100, // Replace with your actual price ID
+        'price_1PKc85RxKaq31nU54Z4g3aXz' => 500, // Replace with your actual price ID
+    ];
+    return $priceMap[$priceId] ?? 0;
+}
+
 custom_log("Received event: " . $event->type, 'stripe_webhook.log');
 
 // Handle the event
@@ -37,11 +68,11 @@ switch ($event->type) {
                 // We set the balance, customer ID, subscription ID, and the amount of gasergy this subscription provides.
                 $stmt = $pdo->prepare(
                     "UPDATE users SET gasergy_balance = gasergy_balance + ?, " .
-                    "stripe_customer_id = ?, stripe_subscription_id = ?, subscription_gasergy = ? " .
+                    "stripe_customer_id = ?, stripe_subscription_id = ?, subscription_gasergy = ?, app_id = ? " .
                     "WHERE id = ?"
                 );
-                $stmt->execute([$gasergyAmount, $customerId, $subscriptionId, $gasergyAmount, $userId]);
-                custom_log("SUCCESS: checkout.session.completed for user $userId. Credited $gasergyAmount gasergy.", 'stripe_webhook.log');
+                $stmt->execute([$gasergyAmount, $customerId, $subscriptionId, $gasergyAmount, $app_id, $userId]);
+                custom_log("SUCCESS: checkout.session.completed for user $userId. Credited $gasergyAmount gasergy and set app_id to $app_id.", 'stripe_webhook.log');
             } catch (PDOException $e) {
                 http_response_code(500);
                 custom_log('DATABASE ERROR on checkout.session.completed: ' . $e->getMessage(), 'stripe_webhook.log');
