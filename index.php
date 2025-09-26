@@ -109,6 +109,15 @@ if ($is_logged_in) {
     </div>
   </section>
 
+  <section id="pricing-cta" class="section container">
+    <div class="cta-section">
+        <h2>Ready to power up?</h2>
+        <p class="lead">Purchase Gasergy credits to unlock the full potential of your AI agents.</p>
+        <div class="cta-row">
+            <a href="pages/buy-gasergy.php" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;">Buy Gasergy Credits</a>
+        </div>
+    </div>
+  </section>
 
   <section id="faq" class="section container">
     <h2>FAQ</h2>
