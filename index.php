@@ -26,7 +26,7 @@ if ($is_logged_in) {
   <meta name="description" content="Meet SRN — a network of AI agent personas you can try, customize, and power with monthly credits.">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body data-base-path="./">
   <nav class="nav">
     <div class="container nav-inner">
       <div class="brand">
