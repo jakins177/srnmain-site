@@ -126,7 +126,8 @@ const checkoutForm = $('#checkout-form');
 // Handle clicking a "Buy" button on a pricing card
 $$('.price-card [data-buy]').forEach(btn => btn.addEventListener('click', () => {
   if (!window.isUserLoggedIn) {
-    window.location.href = 'auth.html?notice=login_required';
+    const basePath = document.body.dataset.basePath || './';
+    window.location.href = `${basePath}auth.html?notice=login_required`;
     return;
   }
   const plan = btn.getAttribute('data-buy');

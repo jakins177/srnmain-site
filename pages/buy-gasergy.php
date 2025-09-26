@@ -27,7 +27,7 @@ if ($is_logged_in) {
   <meta name="description" content="Purchase Gasergy credits to power your AI agent personas on the SRN network.">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-<body>
+<body data-base-path="../">
   <nav class="nav">
     <div class="container nav-inner">
       <a href="../index.php" class="brand">
