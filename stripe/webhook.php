@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__ . '/../config/logging.php';
+
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../config/stripe.php';
 
-$payload = @file_get_contents('php://input');
+try {
+    $payload = @file_get_contents('php://input');
 $sigHeader = $_SERVER['HTTP_STRIPE_SIGNATURE'] ?? '';
 
 // Verify the webhook signature
@@ -151,3 +153,9 @@ switch ($event->type) {
 }
 
 http_response_code(200);
+} catch (\Throwable $e) {
+    http_response_code(500);
+    custom_log("FATAL Error: " . $e->getMessage() . "\n" . $e->getTraceAsString(), 'stripe_webhook.log');
+    // We can exit here, as the response code has been set and the error logged.
+    exit;
+}
