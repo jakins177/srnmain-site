@@ -41,18 +41,6 @@ if (isset($event->data->object->metadata->app_id)) {
     }
 }
 
-// This is a placeholder function. In a real application, you would have a more robust
-// way of mapping price IDs to gasergy amounts, perhaps by querying the database or
-// using a configuration file.
-function getGasergyForPriceId($priceId) {
-    // Example mapping
-    $priceMap = [
-        'price_1PKc85RxKaq31nU54Z4g3aXy' => 100, // Replace with your actual price ID
-        'price_1PKc85RxKaq31nU54Z4g3aXz' => 500, // Replace with your actual price ID
-    ];
-    return $priceMap[$priceId] ?? 0;
-}
-
 custom_log("Received event: " . $event->type, 'stripe_webhook.log');
 
 // Handle the event
