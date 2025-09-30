@@ -30,10 +30,31 @@ $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
 // Insert the new user
 try {
+    $appIdColumnExists = false;
 
-    $stmt = $pdo->prepare("INSERT INTO users (email, password_hash, gasergy_balance) VALUES (?, ?, 120)");
+    try {
+        $columnCheckStmt = $pdo->prepare("SHOW COLUMNS FROM `users` LIKE 'app_id'");
+        $columnCheckStmt->execute();
+        $appIdColumnExists = $columnCheckStmt->fetch(PDO::FETCH_ASSOC) !== false;
+    } catch (PDOException $e) {
+        custom_log("Registration DB Warning (checking app_id column): " . $e->getMessage(), 'auth.log');
+    }
 
-    $stmt->execute([$email, $passwordHash]);
+    $columns = ['email', 'password_hash', 'gasergy_balance'];
+    $placeholders = ['?', '?', '?'];
+    $values = [$email, $passwordHash, 120];
+
+    if ($appIdColumnExists) {
+        $columns[] = 'app_id';
+        $placeholders[] = '?';
+        $values[] = 'srn_main_0000';
+    }
+
+    $stmt = $pdo->prepare(
+        'INSERT INTO users (' . implode(', ', $columns) . ') VALUES (' . implode(', ', $placeholders) . ')'
+    );
+
+    $stmt->execute($values);
 
     header('Location: ../auth.html?success=registered#login-form');
     exit;
