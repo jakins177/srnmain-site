@@ -41,6 +41,7 @@ if ($is_logged_in) {
         <a href="pages/buy-gasergy.php">Credits</a>
         <a href="#builder">Custom Persona</a>
         <a href="#faq">FAQ</a>
+        <a href="contact.php">Contact</a>
         <?php if ($is_logged_in): ?>
           <span class="chip">Balance: <?php echo number_format($gasergy_balance); ?> G</span>
           <a href="auth/logout.php" class="btn btn-ghost">Log Out</a>
@@ -141,7 +142,7 @@ if ($is_logged_in) {
       <div style="display:flex; gap:14px">
         <a href="#">Terms</a>
         <a href="#">Privacy</a>
-        <a href="mailto:contact@palmtreesdigital.com">Contact</a>
+        <a href="contact.php">Contact</a>
       </div>
     </div>
   </footer>
