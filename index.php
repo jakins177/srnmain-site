@@ -141,7 +141,7 @@ if ($is_logged_in) {
       <div style="display:flex; gap:14px">
         <a href="#">Terms</a>
         <a href="#">Privacy</a>
-        <a href="#">Contact</a>
+        <a href="mailto:contact@palmtreesdigital.com">Contact</a>
       </div>
     </div>
   </footer>
