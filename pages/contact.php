@@ -122,7 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <main class="section container" style="padding-top: 4rem;">
     <div class="contact-layout">
       <section class="contact-card">
-        <header>
+        <header class="contact-header">
+          <span class="eyebrow">Contact SRN</span>
           <h1>We’d love to hear from you</h1>
           <p class="subtle">Send us a note about product ideas, partnerships, or anything else on your mind.</p>
         </header>
@@ -145,13 +146,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST" class="contact-form" novalidate>
           <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>" />
 
-          <label for="contact-name">Name
-            <input id="contact-name" name="name" type="text" required maxlength="255" placeholder="Your name" value="<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>" />
-          </label>
+          <div class="form-grid">
+            <label for="contact-name">Name
+              <input id="contact-name" name="name" type="text" required maxlength="255" placeholder="Your name" value="<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>" />
+            </label>
 
-          <label for="contact-email">Email
-            <input id="contact-email" name="email" type="email" required maxlength="255" placeholder="you@example.com" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" />
-          </label>
+            <label for="contact-email">Email
+              <input id="contact-email" name="email" type="email" required maxlength="255" placeholder="you@example.com" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>" />
+            </label>
+          </div>
 
           <label for="contact-message">How can we help?
             <textarea id="contact-message" name="message" required minlength="10" maxlength="4000" placeholder="Share a few details so we can help out faster."><?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?></textarea>

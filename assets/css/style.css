@@ -161,6 +161,17 @@ a:hover { text-decoration: underline }
   display: grid;
   gap: 16px;
   box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 120% at 0% 0%, rgba(158,203,255,.12), transparent 55%);
+  opacity: .9;
+  pointer-events: none;
 }
 
 .contact-form {
@@ -168,10 +179,41 @@ a:hover { text-decoration: underline }
   gap: 14px;
 }
 
+.contact-header {
+  display: grid;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-header h1 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 36px);
+  letter-spacing: -.2px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  width: max-content;
+}
+
 .contact-form label {
   display: grid;
   gap: 6px;
   font-weight: 600;
+  position: relative;
+  z-index: 1;
 }
 
 .contact-form input,
@@ -182,6 +224,7 @@ a:hover { text-decoration: underline }
   background: rgba(255,255,255,.04);
   color: var(--text);
   font: inherit;
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
 }
 
 .contact-form textarea {
@@ -191,6 +234,58 @@ a:hover { text-decoration: underline }
 
 .contact-form small {
   color: var(--muted);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: rgba(158,203,255,.8);
+  box-shadow: 0 0 0 3px rgba(158,203,255,.18);
+  background: rgba(255,255,255,.08);
+}
+
+.contact-form .form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .contact-form .form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.contact-form .cta-row {
+  position: relative;
+  z-index: 1;
+}
+
+.message {
+  position: relative;
+  z-index: 1;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+  border: 1px solid transparent;
+  background: rgba(255,255,255,.05);
+}
+
+.message.success {
+  border-color: rgba(59,209,127,.4);
+  background: rgba(59,209,127,.16);
+  color: #d8ffe9;
+}
+
+.message.error {
+  border-color: rgba(255,125,125,.5);
+  background: rgba(255,125,125,.14);
+  color: #ffd5d5;
+}
+
+.contact-meta {
+  position: relative;
+  z-index: 1;
 }
 
 .contact-meta {
@@ -217,21 +312,3 @@ dialog::backdrop { background: rgba(3,6,12,.6); backdrop-filter: blur(2px) }
 @keyframes rise { from { transform: translateY(10px); opacity: 0 } }
 @keyframes fadeSlide { from { transform: translateY(8px); opacity: 0 } }
 
-.message {
-  padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  border: 1px solid transparent;
-}
-
-.message.success {
-  background-color: rgba(59, 209, 127, 0.1);
-  border-color: var(--good);
-  color: var(--good);
-}
-
-.message.error {
-  background-color: rgba(255, 125, 125, 0.1);
-  border-color: var(--danger);
-  color: var(--danger);
-}
