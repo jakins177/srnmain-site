@@ -227,7 +227,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <div class="cta-row" style="justify-content:flex-start;">
             <button type="submit" class="btn btn-primary">Send message</button>
-            <span class="subtle">Or email <a href="mailto:contact@palmtreesdigital.com">contact@palmtreesdigital.com</a></span>
+            <span class="subtle">Or email <a href="mailto:contact@palmtreesdigital.com">here</a></span>
           </div>
         </form>
       </section>
@@ -238,12 +238,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <p>Looking to collaborate or feature SRN? Drop the details in the form and the right teammate will follow up.</p>
         </div>
         <div>
-          <strong>Support hours</strong>
-          <p>We’re online Monday–Friday, 9am–5pm PT. Expect quicker replies during these hours.</p>
+          <strong>Feature Request</strong>
+          <p>Have a new feature idea? Or have any questions or comments about a current feature? Let us know.</p>
         </div>
         <div>
           <strong>Need immediate help?</strong>
-            <p>Check our <a href="buy-gasergy.php#faq">FAQ</a> for quick answers or email <a href="mailto:contact@palmtreesdigital.com">contact@palmtreesdigital.com</a>.</p>
+            <p>Check our <a href="buy-gasergy.php#faq">FAQ</a> for quick answers or email <a href="mailto:contact@palmtreesdigital.com">here</a>.</p>
         </div>
       </aside>
     </div>
