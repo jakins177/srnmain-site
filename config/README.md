@@ -2,7 +2,8 @@
 
 ## Environment variables
 
-Mail notifications for contact form submissions use the following environment variables (typically defined in `app.env`):
+Mail notifications for contact form submissions use the following environment variables (typically defined in `app.env`).
+The PHPMailer library required to send SMTP messages is bundled in `lib/PHPMailer`, so no additional Composer packages are necessary beyond the existing Stripe dependency.
 
 | Variable | Description |
 | --- | --- |
