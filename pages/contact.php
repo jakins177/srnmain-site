@@ -1,12 +1,19 @@
 <?php
-session_start();
-
+require_once __DIR__ . '/../lib/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/../lib/PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/../lib/PHPMailer/src/SMTP.php';
 require_once __DIR__ . '/../config/logging.php';
+
+use PHPMailer\PHPMailer\Exception as MailException;
+use PHPMailer\PHPMailer\PHPMailer;
+
+session_start();
 
 $is_logged_in = isset($_SESSION['user_id']);
 $gasergy_balance = 0;
 $errors = [];
 $success = false;
+$notification_warning = '';
 $name = '';
 $email = '';
 $message = '';
@@ -76,6 +83,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $message = '';
                 $_SESSION['contact_csrf'] = bin2hex(random_bytes(32));
                 $csrf_token = $_SESSION['contact_csrf'];
+
+                try {
+                    $mailConfig = require __DIR__ . '/../config/mail.php';
+                    $recipients = $mailConfig['notification_recipients'] ?? [];
+
+                    if ($recipients && !empty($mailConfig['host']) && !empty($mailConfig['username']) && !empty($mailConfig['password'])) {
+                        $mailer = new PHPMailer(true);
+                        $mailer->isSMTP();
+                        $mailer->Host = $mailConfig['host'];
+                        $mailer->SMTPAuth = true;
+                        $mailer->Username = $mailConfig['username'];
+                        $mailer->Password = $mailConfig['password'];
+                        if (!empty($mailConfig['encryption'])) {
+                            $mailer->SMTPSecure = $mailConfig['encryption'];
+                        }
+                        if (!empty($mailConfig['port'])) {
+                            $mailer->Port = (int) $mailConfig['port'];
+                        }
+                        $mailer->CharSet = 'UTF-8';
+
+                        $fromAddress = $mailConfig['from_address'] ?: $mailConfig['username'];
+                        if ($fromAddress) {
+                            $mailer->setFrom($fromAddress, $mailConfig['from_name'] ?? '');
+                        }
+
+                        $replyTo = $mailConfig['reply_to_override'] ?: $email;
+                        if ($replyTo) {
+                            $mailer->addReplyTo($replyTo, $name ?: $replyTo);
+                        }
+
+                        foreach ($recipients as $recipient) {
+                            $mailer->addAddress($recipient);
+                        }
+
+                        $mailer->Subject = 'New contact form submission';
+                        $mailer->isHTML(false);
+                        $mailer->Body = "A new contact form message was submitted:\n\n" .
+                            "Name: {$name}\n" .
+                            "Email: {$email}\n\n" .
+                            "Message:\n{$message}\n";
+
+                        $mailer->send();
+                    } else {
+                        $notification_warning = 'We saved your message but could not send an email alert because mail settings are incomplete.';
+                        custom_log('Contact notification skipped: SMTP settings are incomplete.', 'contact.log');
+                    }
+                } catch (MailException $mailException) {
+                    $notification_warning = 'We saved your message but could not send an email alert to the team. They will review it shortly.';
+                    custom_log('Contact notification failed: ' . $mailException->getMessage(), 'contact.log');
+                } catch (Throwable $mailSetupException) {
+                    $notification_warning = 'We saved your message but could not send an email alert to the team. They will review it shortly.';
+                    custom_log('Contact notification failed: ' . $mailSetupException->getMessage(), 'contact.log');
+                }
             } catch (PDOException $e) {
                 custom_log('Contact form submission failed: ' . $e->getMessage(), 'contact.log');
                 $errors[] = 'We ran into an issue saving your message. Please try again shortly or reach out via email.';
@@ -130,6 +190,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if ($success): ?>
           <div class="message success">Thanks! Your message is in our queue and we’ll get back to you shortly.</div>
+        <?php endif; ?>
+
+        <?php if ($notification_warning): ?>
+          <div class="message" style="background:var(--warning-soft); color:var(--warning-strong); border:1px solid var(--warning-strong);">
+            <?php echo htmlspecialchars($notification_warning, ENT_QUOTES, 'UTF-8'); ?>
+          </div>
         <?php endif; ?>
 
         <?php if ($errors): ?>
