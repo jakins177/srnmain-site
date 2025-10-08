@@ -3,11 +3,72 @@ require_once __DIR__ . '/../lib/PHPMailer/src/Exception.php';
 require_once __DIR__ . '/../lib/PHPMailer/src/PHPMailer.php';
 require_once __DIR__ . '/../lib/PHPMailer/src/SMTP.php';
 require_once __DIR__ . '/../config/logging.php';
-
 use PHPMailer\PHPMailer\Exception as MailException;
 use PHPMailer\PHPMailer\PHPMailer;
 
 session_start();
+
+$logFileName = 'contact.log';
+
+set_error_handler(function ($severity, $message, $file, $line) use ($logFileName) {
+    if (!(error_reporting() & $severity)) {
+        return false;
+    }
+
+    $severityMap = [
+        E_ERROR => 'E_ERROR',
+        E_WARNING => 'E_WARNING',
+        E_PARSE => 'E_PARSE',
+        E_NOTICE => 'E_NOTICE',
+        E_CORE_ERROR => 'E_CORE_ERROR',
+        E_CORE_WARNING => 'E_CORE_WARNING',
+        E_COMPILE_ERROR => 'E_COMPILE_ERROR',
+        E_COMPILE_WARNING => 'E_COMPILE_WARNING',
+        E_USER_ERROR => 'E_USER_ERROR',
+        E_USER_WARNING => 'E_USER_WARNING',
+        E_USER_NOTICE => 'E_USER_NOTICE',
+        E_RECOVERABLE_ERROR => 'E_RECOVERABLE_ERROR',
+        E_DEPRECATED => 'E_DEPRECATED',
+        E_USER_DEPRECATED => 'E_USER_DEPRECATED',
+    ];
+
+    $label = $severityMap[$severity] ?? 'E_UNKNOWN';
+    $logMessage = sprintf('%s: %s in %s on line %d', $label, $message, $file, $line);
+    custom_log($logMessage, $logFileName);
+
+    return false;
+});
+
+set_exception_handler(function ($throwable) use ($logFileName) {
+    $logMessage = sprintf(
+        'Unhandled %s: %s in %s on line %d',
+        get_class($throwable),
+        $throwable->getMessage(),
+        $throwable->getFile(),
+        $throwable->getLine()
+    );
+    custom_log($logMessage, $logFileName);
+
+    if (!headers_sent()) {
+        http_response_code(500);
+    }
+
+    echo 'An unexpected error occurred while loading the contact page. Please try again later.';
+    exit;
+});
+
+register_shutdown_function(function () use ($logFileName) {
+    $error = error_get_last();
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        $logMessage = sprintf(
+            'Fatal error: %s in %s on line %d',
+            $error['message'],
+            $error['file'],
+            $error['line']
+        );
+        custom_log($logMessage, $logFileName);
+    }
+});
 
 $is_logged_in = isset($_SESSION['user_id']);
 $gasergy_balance = 0;
