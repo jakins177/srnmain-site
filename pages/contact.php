@@ -1,3 +1,10 @@
+
+<?php
+    ini_set('display_errors', 1); // Disable displaying errors in the browser
+    ini_set('log_errors', 1); // Enable logging errors
+  //  ini_set('error_log', '/path/to/your/php-error.log'); // Specify the error log file
+    error_reporting(E_ALL); // Report all errors
+    ?>
 <?php
 require_once __DIR__ . '/../lib/PHPMailer/src/Exception.php';
 require_once __DIR__ . '/../lib/PHPMailer/src/PHPMailer.php';
