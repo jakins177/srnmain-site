@@ -1,8 +1,34 @@
 <?php
-require_once __DIR__ . '/../lib/PHPMailer/src/Exception.php';
-require_once __DIR__ . '/../lib/PHPMailer/src/PHPMailer.php';
-require_once __DIR__ . '/../lib/PHPMailer/src/SMTP.php';
 require_once __DIR__ . '/../config/logging.php';
+
+$autoloadPath = __DIR__ . '/../vendor/autoload.php';
+
+if (file_exists($autoloadPath)) {
+    require_once $autoloadPath;
+} else {
+    $localMailerPath = __DIR__ . '/../lib/PHPMailer/src';
+    $requiredMailerFiles = [
+        $localMailerPath . '/Exception.php',
+        $localMailerPath . '/PHPMailer.php',
+        $localMailerPath . '/SMTP.php',
+    ];
+
+    foreach ($requiredMailerFiles as $mailerFile) {
+        if (!file_exists($mailerFile)) {
+            custom_log('Missing PHPMailer dependency: ' . $mailerFile, 'contact.log');
+
+            if (!headers_sent()) {
+                http_response_code(500);
+            }
+
+            echo 'The contact form is temporarily unavailable. Please try again later.';
+            exit;
+        }
+
+        require_once $mailerFile;
+    }
+}
+
 use PHPMailer\PHPMailer\Exception as MailException;
 use PHPMailer\PHPMailer\PHPMailer;
 

@@ -3,7 +3,16 @@
 ## Environment variables
 
 Mail notifications for contact form submissions use the following environment variables (typically defined in `app.env`).
-The PHPMailer library required to send SMTP messages is bundled in `lib/PHPMailer`, so no additional Composer packages are necessary beyond the existing Stripe dependency.
+PHPMailer can be loaded either via Composer (preferred) or from the bundled fallback copies stored in `lib/PHPMailer`.
+
+### Do I need to run Composer on the server?
+
+It depends on how you deploy:
+
+- **If you run `composer install` as part of your deployment**, the autoloader in `vendor/autoload.php` will be present and the contact page will automatically use the Composer-installed PHPMailer package.
+- **If you do not run Composer on the server**, no additional commands are required. Just make sure the `lib/PHPMailer` directory from this repository is uploaded alongside the rest of the site files—the contact page will fall back to those bundled sources.
+
+Either option is supported; choose the workflow that best matches your hosting environment.
 
 | Variable | Description |
 | --- | --- |
