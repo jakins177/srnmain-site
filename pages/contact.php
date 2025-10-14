@@ -171,6 +171,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':email' => $email,
                     ':message' => $message,
                 ]);
+
+                // Preserve the submitted values for notification emails before clearing the form state.
+                $submittedName = $name;
+                $submittedEmail = $email;
+                $submittedMessage = $message;
+
                 $success = true;
                 $name = '';
                 $email = '';
@@ -202,9 +208,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mailer->setFrom($fromAddress, $mailConfig['from_name'] ?? '');
                         }
 
-                        $replyTo = $mailConfig['reply_to_override'] ?: $email;
+                        $replyTo = $mailConfig['reply_to_override'] ?: $submittedEmail;
                         if ($replyTo) {
-                            $mailer->addReplyTo($replyTo, $name ?: $replyTo);
+                            $mailer->addReplyTo($replyTo, $submittedName ?: $replyTo);
                         }
 
                         foreach ($recipients as $recipient) {
@@ -214,9 +220,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $mailer->Subject = 'New contact form submission';
                         $mailer->isHTML(false);
                         $mailer->Body = "A new contact form message was submitted:\n\n" .
-                            "Name: {$name}\n" .
-                            "Email: {$email}\n\n" .
-                            "Message:\n{$message}\n";
+                            "Name: {$submittedName}\n" .
+                            "Email: {$submittedEmail}\n\n" .
+                            "Message:\n{$submittedMessage}\n";
 
                         $mailer->send();
                     } else {
