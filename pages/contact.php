@@ -13,7 +13,7 @@ $autoloadPath = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($autoloadPath)) {
     require_once $autoloadPath;
 } else {
-    $localMailerPath = __DIR__ . '/../lib/PHPMailer/src';
+    $localMailerPath = __DIR__ . '/../vendor/phpmailer/phpmailer/src';
     $requiredMailerFiles = [
         $localMailerPath . '/Exception.php',
         $localMailerPath . '/PHPMailer.php',
