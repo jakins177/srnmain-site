@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
 
                         foreach ($recipients as $recipient) {
-                            $mailer->addAddress($recipient);
+                            $mailer->addAddress($recipient, $mailConfig['recipient_name'] ?? '');
                         }
 
                         $mailer->Subject = 'New contact form submission';
