@@ -14,5 +14,4 @@ return [
     'from_name' => getenv('SMTP_FROM_NAME') ?: 'SRN Notifications',
     'reply_to_override' => getenv('CONTACT_REPLY_TO') ?: '',
     'notification_recipients' => $recipients,
-    'recipient_name' => getenv('CONTACT_NOTIFICATION_RECIPIENT_NAME') ?: '',
 ];

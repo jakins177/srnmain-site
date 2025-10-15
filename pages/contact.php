@@ -203,7 +203,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         $fromAddress = $mailConfig['from_address'] ?: $mailConfig['username'];
                         if ($fromAddress) {
-                            $mailer->setFrom($fromAddress, $mailConfig['from_name'] ?? '');
+                            $fromName = $notificationData['name'] !== '' ? $notificationData['name'] : ($mailConfig['from_name'] ?? '');
+                            $mailer->setFrom($fromAddress, $fromName);
                         }
 
                         $replyToEmail = $mailConfig['reply_to_override'] ?: $notificationData['email'];
@@ -217,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
 
                         foreach ($recipients as $recipient) {
-                            $mailer->addAddress($recipient, $mailConfig['recipient_name'] ?? '');
+                            $mailer->addAddress($recipient);
                         }
 
                         $mailer->Subject = 'New contact form submission';
