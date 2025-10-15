@@ -208,9 +208,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mailer->setFrom($fromAddress, $mailConfig['from_name'] ?? '');
                         }
 
-                        $replyTo = $mailConfig['reply_to_override'] ?: $submittedEmail;
-                        if ($replyTo) {
-                            $mailer->addReplyTo($replyTo, $submittedName ?: $replyTo);
+                        $replyToEmail = $mailConfig['reply_to_override'] ?: $submittedEmail;
+                        if ($replyToEmail) {
+                            $replyToName = $submittedName !== '' ? $submittedName : '';
+                            $mailer->addReplyTo($replyToEmail, $replyToName);
                         }
 
                         foreach ($recipients as $recipient) {
