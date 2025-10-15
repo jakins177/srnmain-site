@@ -171,10 +171,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ':email' => $email,
                     ':message' => $message,
                 ]);
+
+                $notificationData = [
+                    'name' => preg_replace("/[\r\n]+/", ' ', $name),
+                    'email' => $email,
+                    'message' => str_replace(["\r\n", "\r"], "\n", $message),
+                ];
+
                 $success = true;
-                $name = '';
-                $email = '';
-                $message = '';
                 $_SESSION['contact_csrf'] = bin2hex(random_bytes(32));
                 $csrf_token = $_SESSION['contact_csrf'];
 
@@ -202,9 +206,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $mailer->setFrom($fromAddress, $mailConfig['from_name'] ?? '');
                         }
 
-                        $replyTo = $mailConfig['reply_to_override'] ?: $email;
-                        if ($replyTo) {
-                            $mailer->addReplyTo($replyTo, $name ?: $replyTo);
+                        $replyToEmail = $mailConfig['reply_to_override'] ?: $notificationData['email'];
+                        if ($replyToEmail) {
+                            if (!filter_var($replyToEmail, FILTER_VALIDATE_EMAIL)) {
+                                $replyToEmail = $notificationData['email'];
+                            }
+
+                            $replyToName = $notificationData['name'] !== '' ? $notificationData['name'] : '';
+                            $mailer->addReplyTo($replyToEmail, $replyToName);
                         }
 
                         foreach ($recipients as $recipient) {
@@ -213,10 +222,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         $mailer->Subject = 'New contact form submission';
                         $mailer->isHTML(false);
-                        $mailer->Body = "A new contact form message was submitted:\n\n" .
-                            "Name: {$name}\n" .
-                            "Email: {$email}\n\n" .
-                            "Message:\n{$message}\n";
+                        $mailer->Body = implode("\n", [
+                            'A new contact form message was submitted:',
+                            '',
+                            'Name: ' . $notificationData['name'],
+                            'Email: ' . $notificationData['email'],
+                            '',
+                            'Message:',
+                            $notificationData['message'],
+                        ]);
 
                         $mailer->send();
                     } else {
@@ -230,6 +244,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $notification_warning = 'We saved your message but could not send an email alert to the team. They will review it shortly.';
                     custom_log('Contact notification failed: ' . $mailSetupException->getMessage(), 'contact.log');
                 }
+
+                $name = '';
+                $email = '';
+                $message = '';
             } catch (PDOException $e) {
                 custom_log('Contact form submission failed: ' . $e->getMessage(), 'contact.log');
                 $errors[] = 'We ran into an issue saving your message. Please try again shortly or reach out via email.';
