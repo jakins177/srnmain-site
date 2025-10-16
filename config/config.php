@@ -8,14 +8,18 @@ if (file_exists($envPath)) {
             continue;
         }
 
-        list($name, $value) = explode('=', $line, 2);
-        $name = trim($name);
-        $value = trim($value);
+        if (strpos($line, '=') === false) {
+            continue;
+        }
 
-        if (!array_key_exists($name, $_SERVER) && !array_key_exists($name, $_ENV)) {
-            putenv(sprintf('%s=%s', $name, $value));
-            $_ENV[$name] = $value;
-            $_SERVER[$name] = $value;
+        list($envKey, $envValue) = explode('=', $line, 2);
+        $envKey = trim($envKey);
+        $envValue = trim($envValue);
+
+        if (!array_key_exists($envKey, $_SERVER) && !array_key_exists($envKey, $_ENV)) {
+            putenv(sprintf('%s=%s', $envKey, $envValue));
+            $_ENV[$envKey] = $envValue;
+            $_SERVER[$envKey] = $envValue;
         }
     }
 }
