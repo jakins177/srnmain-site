@@ -142,8 +142,8 @@ if ($is_logged_in) {
     <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
       <div>© <span id="year"></span> SRN — Software Robot Network</div>
       <div style="display:flex; gap:14px">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
+        <a href="pages/policies.php">Terms</a>
+        <a href="pages/policies.php">Privacy</a>
 
         <a href="pages/contact.php">Contact</a>
 
