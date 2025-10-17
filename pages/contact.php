@@ -368,8 +368,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
       <div>© <span id="year"></span> SRN — Software Robot Network</div>
       <div style="display:flex; gap:14px">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
+        <a href="policies.php">Terms</a>
+        <a href="policies.php">Privacy</a>
         <a href="contact.php">Contact</a>
       </div>
     </div>
