@@ -124,7 +124,7 @@ if ($is_logged_in) {
 
       <section class="policy-section">
         <h2>10. Contact</h2>
-        <p>If you have questions about these Terms, email <a href="mailto:contact@palmtreesdigital.com">contact@palmtreesdigital.com</a> or write to Palm Trees AI Software Robot Network, Attn: Legal, 548 Market St #87995, San Francisco, CA 94104.</p>
+        <p>If you have questions about these Terms, email <a href="mailto:contact@palmtreesdigital.com">contact@palmtreesdigital.com</a>.</p>
       </section>
 
       <section class="policy-divider">
@@ -199,7 +199,7 @@ if ($is_logged_in) {
 
       <section class="policy-section">
         <h2>10. Contact</h2>
-        <p>For privacy questions or data requests, email <a href="mailto:privacy@palmtreesai.com">privacy@palmtreesai.com</a>. You can also reach us at Palm Trees AI Software Robot Network, 548 Market St #87995, San Francisco, CA 94104.</p>
+        <p>For privacy questions or data requests, email <a href="mailto:privacy@palmtreesai.com">privacy@palmtreesai.com</a>.</p>
       </section>
     </div>
   </main>
