@@ -62,7 +62,7 @@ if ($is_logged_in) {
       <p class="lead">Lock in 50% off during pre-launch. Credits renew per your plan.</p>
       <p class="subtle" style="margin-top:8px"><strong>Note:</strong> SRN is still pre-launch and some products may not be available yet. Buying Gasergy now secures this discount before prices return to normal at launch.</p>
       <p style="margin-top:16px">
-        <a class="btn btn-ghost" href="https://billing.stripe.com/p/login/test_00wbJ12SW34q2cK1O10sU00" target="_blank" rel="noopener">Manage your subscription</a>
+        <a class="btn btn-ghost" href="https://billing.stripe.com/p/login/00wbJ12SW34q2cK1O10sU00" target="_blank" rel="noopener">Manage your subscription</a>
       </p>
     </div>
 
