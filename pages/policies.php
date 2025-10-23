@@ -43,6 +43,7 @@ if ($is_logged_in) {
         <a href="buy-gasergy.php#faq">FAQ</a>
         <a href="contact.php">Contact</a>
         <?php if ($is_logged_in): ?>
+          <a href="settings.php">Settings</a>
           <span class="chip">Balance: <?php echo number_format($gasergy_balance); ?> G</span>
           <a href="../auth/logout.php" class="btn btn-ghost">Log Out</a>
         <?php else: ?>
