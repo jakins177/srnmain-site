@@ -3,6 +3,9 @@ session_start();
 $is_logged_in = isset($_SESSION['user_id']);
 $gasergy_balance = 0;
 
+$config = require __DIR__ . '/../config/app.php';
+$billing_portal_url = $config['billing_portal_url'] ?? '';
+
 if ($is_logged_in) {
     // Adjusted path for db.php
     require_once __DIR__ . '/../config/db.php';
@@ -46,6 +49,7 @@ if ($is_logged_in) {
         <a href="contact.php">Contact</a>
 
         <?php if ($is_logged_in): ?>
+          <a href="settings.php">Settings</a>
           <span class="chip">Balance: <?php echo number_format($gasergy_balance); ?> G</span>
           <a href="../auth/logout.php" class="btn btn-ghost">Log Out</a>
         <?php else: ?>
@@ -61,9 +65,11 @@ if ($is_logged_in) {
       <h2>Pre-launch Gasergy credits</h2>
       <p class="lead">Lock in 50% off during pre-launch. Credits renew per your plan.</p>
       <p class="subtle" style="margin-top:8px"><strong>Note:</strong> SRN is still pre-launch and some products may not be available yet. Buying Gasergy now secures this discount before prices return to normal at launch.</p>
+      <?php if ($billing_portal_url): ?>
       <p style="margin-top:16px">
-        <a class="btn btn-ghost" href="https://billing.stripe.com/p/login/00wbJ12SW34q2cK1O10sU00" target="_blank" rel="noopener">Manage your subscription</a>
+        <a class="btn btn-ghost" href="<?php echo htmlspecialchars($billing_portal_url, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener">Manage your subscription</a>
       </p>
+      <?php endif; ?>
     </div>
 
     <div class="billing-toggle" role="tablist" aria-label="Billing period" style="margin-top:20px">
