@@ -40,12 +40,14 @@ a:hover { text-decoration: underline }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0 }
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .2px }
 .logo {
-  width: 34px; height: 34px; border-radius: 9px; flex: 0 0 34px;
-  background: var(--grad-1);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 6px 20px rgba(122,107,255,.3);
-  position: relative; overflow: hidden;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  flex: 0 0 42px;
+  background: #0a0f20 url('../img/palm-trees-ai-logo.svg') center/cover no-repeat;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.22), 0 10px 26px rgba(0,0,0,.35);
+  overflow: hidden;
 }
-.logo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(220% 100% at 0% 0%, rgba(255,255,255,.6), transparent 55%); mix-blend-mode: overlay }
 .nav-links { display: flex; gap: 18px; align-items: center; font-size: 14px }
 .nav-links a { color: var(--text); opacity: .8 }
 .nav-links a:hover { opacity: 1 }
