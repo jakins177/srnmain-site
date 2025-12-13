@@ -1,0 +1,66 @@
+<svg width="1024" height="1024" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Palm Trees AI logo">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop stop-color="#0a0f20" offset="0%"/>
+      <stop stop-color="#130c2f" offset="60%"/>
+      <stop stop-color="#1c0d3a" offset="100%"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop stop-color="#ff8f63" offset="0%"/>
+      <stop stop-color="#f74f8b" offset="60%"/>
+      <stop stop-color="#a546ff" offset="100%"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop stop-color="#79f7ff" offset="0%" stop-opacity="0.85"/>
+      <stop stop-color="#6b7cff" offset="50%" stop-opacity="0.85"/>
+      <stop stop-color="#ff7df6" offset="100%" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop stop-color="#62d7ff" offset="0%" stop-opacity="0.8"/>
+      <stop stop-color="#4dbbff" offset="100%" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="text" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop stop-color="#6ee9ff" offset="0%"/>
+      <stop stop-color="#5d8cff" offset="50%"/>
+      <stop stop-color="#7dffef" offset="100%"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="24" flood-color="#060911" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <g transform="translate(30 16)">
+      <circle cx="226" cy="210" r="148" fill="url(#sun)" opacity="0.95"/>
+      <g fill="rgba(255,255,255,0.08)">
+        <rect x="80" y="230" width="292" height="10" fill="rgba(255,255,255,0.09)"/>
+        <rect x="70" y="250" width="312" height="10" fill="rgba(255,255,255,0.08)"/>
+        <rect x="60" y="270" width="332" height="10" fill="rgba(255,255,255,0.07)"/>
+        <rect x="50" y="290" width="352" height="10" fill="rgba(255,255,255,0.06)"/>
+      </g>
+      <path d="M68 352 C140 322 312 322 380 352 L380 375 L68 375 Z" fill="#0a0f20"/>
+      <g stroke-linecap="round" stroke-linejoin="round">
+        <path d="M194 342 C200 280 220 230 232 180" stroke="#1c0d33" stroke-width="18"/>
+        <path d="M262 342 C262 276 260 228 250 178" stroke="#1c0d33" stroke-width="18"/>
+        <path d="M228 188 C204 164 188 150 166 146" stroke="url(#glow)" stroke-width="12"/>
+        <path d="M226 186 C248 156 272 140 300 140" stroke="url(#glow)" stroke-width="12"/>
+        <path d="M228 188 C246 200 270 208 294 214" stroke="url(#glow)" stroke-width="10"/>
+        <path d="M224 190 C208 196 192 214 180 232" stroke="url(#glow)" stroke-width="10"/>
+        <path d="M252 180 C280 160 304 156 330 158" stroke="url(#glow)" stroke-width="10"/>
+        <path d="M252 184 C270 204 292 222 316 232" stroke="url(#glow)" stroke-width="10"/>
+        <path d="M252 186 C230 220 218 244 210 270" stroke="url(#glow)" stroke-width="10"/>
+      </g>
+      <g stroke="url(#wave)" stroke-width="6" stroke-linecap="round" opacity="0.9">
+        <path d="M120 392 H356"/>
+        <path d="M140 406 H336"/>
+        <path d="M104 420 H366"/>
+      </g>
+    </g>
+    <g transform="translate(38 432)">
+      <text x="50%" y="18" text-anchor="middle" fill="#00112c" font-family="'Poppins', 'Inter', sans-serif" font-weight="800" font-size="54" opacity="0.6">PALM TREES</text>
+      <text x="50%" y="74" text-anchor="middle" fill="#00112c" font-family="'Poppins', 'Inter', sans-serif" font-weight="800" font-size="46" opacity="0.6">AI</text>
+      <text x="50%" y="14" text-anchor="middle" fill="url(#text)" font-family="'Poppins', 'Inter', sans-serif" font-weight="800" font-size="54" letter-spacing="1.2">PALM TREES</text>
+      <text x="50%" y="70" text-anchor="middle" fill="url(#text)" font-family="'Poppins', 'Inter', sans-serif" font-weight="800" font-size="46" letter-spacing="4">AI</text>
+    </g>
+  </g>
+</svg>
