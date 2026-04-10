@@ -22,8 +22,8 @@ if ($is_logged_in) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SRN • Palm Trees AI Software Robot Network</title>
-  <meta name="description" content="Meet SRN — a network of AI agent personas you can try, customize, and power with monthly credits.">
+  <title>PalmTreesAI • Levo Genesis AI Agent Builder Marketplace</title>
+  <meta name="description" content="PalmTreesAI is building Levo Genesis AI, a flagship platform for creating, launching, and managing AI agents with a future-ready marketplace.">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-base-path="./">
@@ -32,14 +32,14 @@ if ($is_logged_in) {
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
-          <div>SRN</div>
-          <small style="color:var(--muted); font-weight:600">Palm Trees AI Software Robot Network</small>
+          <div>PalmTreesAI</div>
+          <small style="color:var(--muted); font-weight:600">Home of Levo Genesis AI</small>
         </div>
       </div>
       <div class="nav-links">
-        <a href="#bots">Bots</a>
-        <a href="pages/buy-gasergy.php">Credits</a>
-        <a href="#builder">Custom Persona</a>
+        <a href="#flagship">Levo Genesis</a>
+        <a href="#vision">Platform Vision</a>
+        <a href="#builder">Marketplace</a>
         <a href="#faq">FAQ</a>
 
         <a href="pages/contact.php">Contact</a>
@@ -58,47 +58,54 @@ if ($is_logged_in) {
   <header class="hero container">
     <div class="hero-grid">
       <div>
-        <h1>Meet your <span class="gradient-text">Software Robot Network</span></h1>
-        <p>Curated AI agent personas for whatever you’re building next — start with coding (HTML, CSS, JavaScript), then expand into legal, real estate, medical, and entertainment. Top‑tier UX, no fluff.</p>
+        <h1>Build, launch, and scale with <span class="gradient-text">Levo Genesis AI</span></h1>
+        <p><strong>PalmTreesAI</strong> is building a focused AI agent ecosystem, led by <strong>Levo Genesis AI</strong> — our flagship platform for helping users create, manage, and eventually monetize their own AI agents.</p>
         <div class="cta-row">
-          <a href="#bots" class="btn btn-primary">Explore bots</a>
-          <a href="pages/buy-gasergy.php" class="btn btn-ghost">Buy credits</a>
-          <span class="chip" title="Live status"><span class="dot"></span> Alpha preview</span>
+          <a href="#flagship" class="btn btn-primary">Explore Levo Genesis</a>
+          <a href="http://levo.palmtreesai.com/" class="btn btn-ghost">Visit SaaS App</a>
+          <span class="chip" title="Live status"><span class="dot"></span> Flagship product in active build</span>
         </div>
         <div class="hero-card" style="margin-top:16px" aria-live="polite">
-          <div class="row"><span class="chip">Fast setup</span><span class="chip">Same login for all agents</span><span class="chip">Credit‑based</span></div>
-          <div class="row" style="color:var(--muted)">SRN uses monthly credits called gasergy — for now use your same gasergy on any AI functionalty network wide. Upgrade anytime.</div>
+          <div class="row"><span class="chip">Multi-tenant SaaS</span><span class="chip">User accounts</span><span class="chip">Marketplace-ready</span></div>
+          <div class="row" style="color:var(--muted)">Levo Genesis AI is being designed as a monetized platform where users can register, build their own agents, manage them in a dashboard, and grow into a broader marketplace experience.</div>
         </div>
       </div>
       <aside>
         <div class="hero-card" role="status">
-          <div class="row"><div class="avatar" aria-hidden="true">HM</div><div><strong>HTML Master</strong><br><small class="subtle">Your friendly markup AI Tutor</small></div></div>
-          <div class="row" style="color:var(--muted)">“Course and AI companion”</div>
+          <div class="row"><div class="avatar" aria-hidden="true">LG</div><div><strong>Levo Genesis AI</strong><br><small class="subtle">Flagship AI agent builder platform</small></div></div>
+          <div class="row" style="color:var(--muted)">“Create your own agents, manage them, and prepare for marketplace growth.”</div>
           <div>
-            <a class="btn btn-primary" href="pages/html-master-signup.html">Try now</a>
-            <button class="btn btn-ghost" data-details="html-master">Details</button>
+            <a class="btn btn-primary" href="http://levo.palmtreesai.com/">Coming soon</a>
+            <button class="btn btn-ghost" data-details="html-master">Platform details</button>
           </div>
-          <div class="row"><small class="subtle">Tip: Course is free, learn HTML even faster with the HTML master AI companion</small></div>
+          <div class="row"><small class="subtle">PalmTreesAI’s core product direction is shifting toward a commercial AI agent builder and marketplace experience.</small></div>
         </div>
       </aside>
     </div>
   </header>
 
-  <section id="bots" class="section container">
-    <h2>Persona library</h2>
-    <p class="lead">Pick a specialist to get moving faster. Filter by category or search by name.</p>
-    <div class="pillbar" id="pillbar" role="tablist" aria-label="Categories"></div>
-    <div class="searchbar" style="margin-bottom:14px">
-      <input id="searchInput" placeholder="Search personas… (e.g. HTML, legal, JavaScript)" aria-label="Search personas" />
-      <button class="btn btn-ghost" id="clearSearch" title="Clear search">Clear</button>
-    </div>
+  <section id="flagship" class="section container">
+    <h2>Flagship product: Levo Genesis AI</h2>
+    <p class="lead">Levo Genesis AI is the product we are building first: a focused SaaS platform where users can sign up, create their own AI agents, manage them through a secure dashboard, and prepare for a larger agent marketplace.</p>
     <div class="grid" id="cards"></div>
+  </section>
+
+  <section id="vision" class="section container">
+    <div class="cta-section">
+      <h2>PalmTreesAI is the brand. <span class="gradient-text">Levo Genesis AI is the flagship.</span></h2>
+      <p class="lead">PalmTreesAI remains the parent company and ecosystem brand. Levo Genesis AI becomes the spearhead product — a clearer, more monetizable path that can later expand into templates, reusable agents, team workspaces, and a marketplace.</p>
+      <div class="cta-row">
+        <span class="chip">Parent company brand</span>
+        <span class="chip">Flagship SaaS product</span>
+        <span class="chip">Future marketplace path</span>
+      </div>
+    </div>
   </section>
 
   <section id="builder" class="section container">
     <div class="cta-section">
-      <h2>Create a <span class="gradient-text">custom AI persona</span></h2>
-      <p class="lead">Design the tone, tools, and guardrails. Share it with your team — or with the world. <strong style="color:var(--warn)">Coming soon.</strong></p>
+      <h2>Marketplace roadmap: <span class="gradient-text">build and publish AI agents</span></h2>
+      <p class="lead">Levo Genesis AI starts as an agent builder SaaS, then grows into a marketplace where users can create, refine, share, and potentially monetize agent templates and specialized assistants. <strong style="color:var(--warn)">Coming soon.</strong></p>
       <div class="cta-row">
         <a
           href="https://forms.gle/jdXHYwVAL5miG11f7"
@@ -108,17 +115,17 @@ if ($is_logged_in) {
           rel="noopener"
         >Join Waitlist</a>
         <!-- <button class="btn btn-ghost" id="watchDemo">Watch concept demo</button> -->
-        <span class="subtle">We’ll email you when the builder opens.</span>
+        <span class="subtle">We’ll email you when Levo Genesis AI opens for early users.</span>
       </div>
     </div>
   </section>
 
   <section id="pricing-cta" class="section container">
     <div class="cta-section">
-        <h2>Ready to power up?</h2>
-        <p class="lead">Purchase Gasergy credits to unlock the full potential of your AI agents.</p>
+        <h2>Get early access to the flagship build</h2>
+        <p class="lead">We’re focusing PalmTreesAI around Levo Genesis AI first. Join early, track the rollout, and be first in line when the commercial agent builder opens.</p>
         <div class="cta-row">
-            <a href="pages/buy-gasergy.php" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;">Buy Gasergy Credits</a>
+            <a href="http://levo.palmtreesai.com/" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 2rem;">Open Levo Subdomain</a>
         </div>
     </div>
   </section>
@@ -126,22 +133,22 @@ if ($is_logged_in) {
   <section id="faq" class="section container">
     <h2>FAQ</h2>
     <details>
-      <summary><strong>How do credits work?</strong></summary>
-      <p class="subtle">Each AI powered action (message, analysis, file read, etc.) uses a tiny amount of credits called gasergy based on compute. Non-AI powered actions are free. Gasergy costs will be transparently shown per action before you run it.</p>
+      <summary><strong>What is Levo Genesis AI?</strong></summary>
+      <p class="subtle">Levo Genesis AI is PalmTreesAI’s flagship SaaS product: a platform for registering an account, building AI agents, managing them from a dashboard, and growing into a larger marketplace over time.</p>
     </details>
     <details>
-      <summary><strong>Do I need an account to try a bot?</strong></summary>
-      <p class="subtle">Yes but you will only have to create one login to use any bot network wide. Sign in when you want to save history or use your credits.</p>
+      <summary><strong>Will users have their own login and dashboard?</strong></summary>
+      <p class="subtle">Yes. The SaaS version is being designed with user registration, secure login, and account-owned agent management so each customer can build and manage their own agents.</p>
     </details>
     <details>
-      <summary><strong>Can I create my own persona?</strong></summary>
-      <p class="subtle">We plan for you to be able to — the Custom Persona Builder is in development. Join the waitlist above and you’ll get early access.</p>
+      <summary><strong>Will there be a marketplace?</strong></summary>
+      <p class="subtle">That is the direction. The plan is to begin with a strong agent builder foundation, then expand into a marketplace experience for reusable templates, specialized assistants, and monetization opportunities.</p>
     </details>
   </section>
 
   <footer class="container">
     <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
-      <div>© <span id="year"></span> SRN — Software Robot Network</div>
+      <div>© <span id="year"></span> PalmTreesAI — Home of Levo Genesis AI</div>
       <div style="display:flex; gap:14px">
         <a href="pages/policies.php">Terms</a>
         <a href="pages/policies.php">Privacy</a>
